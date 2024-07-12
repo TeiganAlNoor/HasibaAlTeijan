@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ملتقى تيجان النور - جامعة بيرزيت</title>
+  <link rel="stylesheet" href="TeiganCss.css">
+      <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon_io/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon_io/android-chrome-512x512.png">
+</head>
+
+<body>
+  <header class="header">
+    <img src="teigan.png" alt="ملتقى تيجان النور - جامعة بيرزيت"
+      class="logo">
+    <h2 class="specific-heading">ملتقى تيجان النور-جامعة بيرزيت</h2>
+    <h3> حاسبة الملتقى </h3>
+  </header>
+
+  <nav class="navigation">
+    <button onclick="showCalculatorMonthly('monthly')">الحاسبة الشهرية</button>
+    <button onclick="showCalculatorCumulative('cumulative')">الحاسبة التراكمية</button>
+    <button onclick="showCalculatorCompetitions('competitions')">حاسبة المسابقات</button>
+  </nav>
+  <button class="instructions" onclick="openInstructions()">التعليمات</button>
+
+
+  <div id="calculator-content">
+    <!-- سيتم إضافة المحتوى الديناميكي هنا -->
+  </div>
+
+  <div id="result-content">
+    <!-- سيتم إضافة نتائج الاختبار هنا -->
+  </div>
+
+  <script src="Teigan.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+
+
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  background-color: rgba(160, 200, 211, 0.265);
+}
+
+.header .logo {
+  width: 150px;
+  height: 150px;
+}
+
+.header h3 {
+  margin: 4px 0;
+  color: #333;
+}
+
+.header h2 {
+  margin: 5px 0;
+  color: #333;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.navigation button {
+  padding: 10px 20px;
+  background-color: #439fd3;
+  color: white;
+  border: none;
+  /* Remove borders */
+  padding: 10px 20px;
+  /* Some padding */
+  text-align: center;
+  /* Centered text */
+  text-decoration: none;
+
+  margin: 4px 2px;
+  /* Add some margin */
+  cursor: pointer;
+  /* Pointer/hand icon on hover */
+  border-radius: 5px;
+}
+
+
+
+.navigation button:hover {
+  background-color: #60b7c2c1;
+}
+
+#calculator-content,
+#result-content {
+  padding: 20px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 8px;
+  border: 1px solid #000000;
+}
+
+th {
+  background-color: #154d5cba;
+  font-size: 0.95em;
+  color: white;
+}
+
+input[type="number"] {
+  width: 60px;
+}
+
+button {
+  margin-top: 5px;
+  padding: 10px 20px;
+}
+
+.result-content {
+  background-color: #4ca8c1ba;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 1em;
+}
+
+/* Media Queries for Responsive Design */
+@media only screen and (max-width: 768px) {
+  table {
+    font-size: 0.75em;
+  }
+
+  input[type="number"] {
+    width: 50px;
+  }
+
+  th,
+  td {
+    padding: 5px;
+  }
+
+  #calculator-content {
+    padding: 10px;
+  }
+
+  .header .logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .navigation button {
+    padding: 5px 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  table {
+    font-size: 0.7em;
+  }
+
+  input[type="number"] {
+    width: 40px;
+  }
+
+  th,
+  td {
+    padding: 4px;
+  }
+
+  .header .logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .navigation button {
+    padding: 5px 8px;
+  }
+}
+
+.calculate-button {
+  background-color: #4CAF50;
+  /* Green background */
+  color: white;
+  /* White text */
+  border: none;
+  /* Remove borders */
+  padding: 10px 20px;
+  /* Some padding */
+  text-align: center;
+  /* Centered text */
+  text-decoration: none;
+  /* Remove underline */
+  display: inline-block;
+  /* Get the element to align with others */
+  font-size: 16px;
+  /* Increase font size */
+  margin: 4px 2px;
+  /* Add some margin */
+  cursor: pointer;
+  /* Pointer/hand icon on hover */
+  border-radius: 5px;
+  /* Rounded corners */
+}
+
+.calculate-button:hover {
+  background-color: #45a049;
+  /* Darker green on hover */
+}
+
+.instructions {
+  position: fixed;
+  top: 10px;
+  /* تعديل القيم حسب الحاجة */
+  right: 10px;
+  /* تعديل القيم حسب الحاجة */
+  background-color: #4CAF50;
+  /* لون الخلفية */
+  color: white;
+  /* لون النص */
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  /* جعل الحواف مدورة */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* إضافة ظل للزر */
+}
