@@ -43,12 +43,12 @@ function validateInput(input) {
 function calculateResults(type) {
   let totalResult = 0;
   document.querySelectorAll('#calculator-content tbody tr').forEach(row => {
-    const corrections = (parseInt(row.querySelector('.corrections').value) || 0) * 2;
-    const wordOpenings = (parseInt(row.querySelector('.word-openings').value) || 0) * 1;
-    const verseOpenings = (parseInt(row.querySelector('.verse-openings').value) || 0) * 2;
-    const memorizedNoRecitation = (parseInt(row.querySelector('.memorized-no-recitation').value) || 0) * 0.1;
-    const memorizedWithRecitation = (parseInt(row.querySelector('.memorized-with-recitation').value) || 0) * 0.5;
-    const result = corrections + wordOpenings + verseOpenings + memorizedNoRecitation + memorizedWithRecitation;
+    const corrections = (parseInt(row.querySelector('.corrections').value) || 0) * 2;// تصحيح حركات
+    const wordOpenings = (parseInt(row.querySelector('.word-openings').value) || 0) * 1;// فتح كلمة 
+    const verseOpenings = (parseInt(row.querySelector('.verse-openings').value) || 0) * 2;// فتح آية 
+    const memorizedNoRecitation = (parseInt(row.querySelector('.memorized-no-recitation').value) || 0) * 0.1; // تأتاة بدون تنبيه 
+    const memorizedWithRecitation = (parseInt(row.querySelector('.memorized-with-recitation').value) || 0) * 0.5;// تأتأة مع تنبيه
+    const result = corrections + wordOpenings + verseOpenings + memorizedNoRecitation + memorizedWithRecitation; // النتيجة
     row.querySelector('.result').textContent = -result.toFixed(1);
     totalResult += result;
   });
