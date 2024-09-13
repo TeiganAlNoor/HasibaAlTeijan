@@ -42,7 +42,15 @@ function validateInput(input) {
 
 function calculateResults(type) {
   let totalResult = 0;
+  let totalAhkamMemAndNon = 0; // Summation of ahkamMemAndNon for all rows
 
+  // First, calculate the total sum of ahkamMemAndNon for all rows
+  document.querySelectorAll('#calculator-content tbody tr').forEach(row => {
+    let ahkamMemAndNon = parseInt(row.querySelector('.ahkamMemAndNon')?.value) || 0;
+    totalAhkamMemAndNon += ahkamMemAndNon;
+  });
+
+  // Now calculate the result for each row
   document.querySelectorAll('#calculator-content tbody tr').forEach(row => {
     let corrections = parseInt(row.querySelector('.corrections').value) || 0;
     let wordOpenings = parseInt(row.querySelector('.word-openings').value) || 0;
@@ -57,23 +65,32 @@ function calculateResults(type) {
     if (type === 'monthly' || type === 'cumulative') {
       result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5;
     } else if (type === 'competitions') {
-      let ahkamMemAndNon = parseInt(row.querySelector('.ahkamMemAndNon')?.value) || 0; // Optional field for competitions
-      let Meaning = parseInt(row.querySelector('.Meaning')?.value) || 0; // Optional field for competitions
-      if (ahkamMemAndNon <= 2) {
+      let ahkamMemAndNon = parseInt(row.querySelector('.ahkamMemAndNon')?.value) || 0;
+      let Meaning = parseInt(row.querySelector('.Meaning')?.value) || 0;
+
+      // Apply the condition: ignore ahkamMemAndNon if total is less than 2
+      if (totalAhkamMemAndNon <= 2) {
         ahkamMemAndNon = 0;
+      } else if (ahkamMemAndNon > 2) {
+        ahkamMemAndNon -= 2; // Apply reduction for individual rows
       }
-      else {
-        ahkamMemAndNon -= 2;
-      }
+
       result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5 + Meaning * 2 + ahkamMemAndNon * 0.2;
     }
+
 
     // Update result for each row
     row.querySelector('.result').textContent = -result.toFixed(1);
 
+
     // Add to total result
     totalResult += result;
   });
+
+  if (totalAhkamMemAndNon > 2) {
+    totalResult = totalResult - 0.4;
+  }
+
 
   // Final total result
   totalResult = 100 - totalResult;
