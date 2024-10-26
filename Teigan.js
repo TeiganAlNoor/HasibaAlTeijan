@@ -63,7 +63,7 @@ function calculateResults(type) {
 
     // Points calculation based on the type
     if (type === 'monthly' || type === 'cumulative') {
-      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5;
+      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.2;
     } else if (type === 'competitions') {
       let ahkamMemAndNon = parseInt(row.querySelector('.ahkamMemAndNon')?.value) || 0;
       let Meaning = parseInt(row.querySelector('.Meaning')?.value) || 0;
@@ -75,7 +75,7 @@ function calculateResults(type) {
         ahkamMemAndNon -= 2; // Apply reduction for individual rows
       }
 
-      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5 + Meaning * 2 + ahkamMemAndNon * 0.2;
+      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.2 + Meaning * 2 + ahkamMemAndNon * 0.2;
     }
 
 
