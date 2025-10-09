@@ -211,3 +211,102 @@ button {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   /* إضافة ظل للزر */
 }
+
+/* Stabilization Calculator Styles */
+.calculator-title {
+  text-align: center;
+  color: #333;
+  margin: 20px 0;
+  font-size: 24px;
+}
+
+.bonus-title {
+  text-align: center;
+  color: #439fd3;
+  margin: 30px 0 15px 0;
+  font-size: 20px;
+}
+
+.bonus-table {
+  margin-top: 20px;
+  border: 2px solid #439fd3;
+}
+
+.bonus-table th {
+  background-color: #439fd3;
+  color: white;
+}
+
+/* Custom Checkbox Styles */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-right: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 2px solid #ddd;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+  border-color: #439fd3;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  right: 6px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* Question and Bonus Result Highlighting */
+.question-result, .bonus-result {
+  font-weight: bold;
+  color: #4CAF50;
+  transition: all 0.3s ease;
+}
+
+.question-result:not(:empty), .bonus-result:not(:empty) {
+  background-color: #f0f8f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
