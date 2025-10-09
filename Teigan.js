@@ -63,7 +63,7 @@ function calculateResults(type) {
 
     // Points calculation based on the type
     if (type === 'monthly' || type === 'cumulative') {
-      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.1;
+      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5;
     } else if (type === 'competitions') {
       let ahkamMemAndNon = parseInt(row.querySelector('.ahkamMemAndNon')?.value) || 0;
       let Meaning = parseInt(row.querySelector('.Meaning')?.value) || 0;
@@ -75,7 +75,7 @@ function calculateResults(type) {
         ahkamMemAndNon -= 2; // Apply reduction for individual rows
       }
 
-      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.1 + Meaning * 2 + ahkamMemAndNon * 0.2;
+      result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5 + Meaning * 2 + ahkamMemAndNon * 0.2;
     }
 
 
@@ -327,7 +327,7 @@ function calculateStabilizationResults(type) {
     let memorizedWithRecitation = parseInt(row.querySelector('.memorized-with-recitation').value) || 0;
 
     // Calculate result for this row
-    let result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.1;
+    let result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5;
 
     // Update result for each row
     row.querySelector('.result').textContent = -result.toFixed(1);
@@ -533,3 +533,4 @@ if (!document.getElementById('confetti-styles')) {
   `;
   document.head.appendChild(style);
 }
+
