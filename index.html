@@ -6,39 +6,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ملتقى تيجان النور - جامعة بيرزيت</title>
   <link rel="stylesheet" href="TeiganCss.css">
-      <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-    <link rel="manifest" href="favicon_io/site.webmanifest">
-    <link rel="icon" type="image/png" sizes="192x192" href="favicon_io/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="favicon_io/android-chrome-512x512.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon_io/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon_io/android-chrome-512x512.png">
+  <!-- DIN Next LT Arabic Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'DIN Next LT Arabic';
+      src: local('DIN Next LT Arabic'), local('DINNextLTArabic');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Hero Header Section -->
   <header class="header">
-    <img src="teigan.png" alt="ملتقى تيجان النور - جامعة بيرزيت"
-      class="logo">
-    <h2 class="specific-heading">ملتقى تيجان النور-جامعة بيرزيت</h2>
-    <h3> حاسبة الملتقى </h3>
+    <!-- Animated Background Elements -->
+    <div class="header-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Floating Crown Decorations -->
+    <div class="floating-crowns">
+      <span class="crown-icon">👑</span>
+      <span class="crown-icon">👑</span>
+      <span class="crown-icon">👑</span>
+    </div>
+
+    <div class="header-content">
+      <div class="logo-container">
+        <div class="logo-wrapper">
+          <div class="logo-glow"></div>
+          <div class="logo-ring"></div>
+          <img src="teigan.png" alt="تيجان" class="logo">
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-name">ملتقى تيجان النور</h1>
+          <div class="tagline-container">
+            <span class="tagline-star">✦</span>
+            <p class="brand-tagline">نسعى لنور تٌرفع به الأمّة</p>
+            <span class="tagline-star">✦</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-decoration"></div>
   </header>
 
-  <nav class="navigation">
-    <button onclick="showCalculatorMonthly('monthly')">الحاسبة الشهرية</button>
-    <button onclick="showCalculatorCumulative('cumulative')">الحاسبة التراكمية</button>
-    <button onclick="showCalculatorCompetitions('competitions')">حاسبة المسابقات</button>
-    <button onclick="showCalculatorStabilization('stabilization')">حاسبة التثبيت</button>
+  <!-- Main Navigation Tabs -->
+  <nav class="main-navigation">
+    <div class="nav-container">
+      <button class="nav-tab active" onclick="switchSection('review')" data-section="review">
+        <span class="nav-icon">📖</span>
+        <span class="nav-text">المراجعة</span>
+      </button>
+      <button class="nav-tab" onclick="switchSection('testing')" data-section="testing">
+        <span class="nav-icon">📝</span>
+        <span class="nav-text">الاختبارات</span>
+      </button>
+      <button class="nav-tab" onclick="switchSection('consolidation')" data-section="consolidation">
+        <span class="nav-icon">📚</span>
+        <span class="nav-text"> دورة التثبيت</span>
+      </button>
+      <button class="nav-tab" onclick="switchSection('quiz')" data-section="quiz">
+        <span class="nav-icon">🎯</span>
+        <span class="nav-text">المسابقات</span>
+      </button>
+    </div>
   </nav>
-  <button class="instructions" onclick="openInstructions()">التعليمات</button>
 
+  <!-- Instructions Button -->
+  <button class="instructions-btn" onclick="openInstructions()">
+    <span class="instructions-icon">ℹ️</span>
+    <span>التعليمات</span>
+  </button>
 
-  <div id="calculator-content">
-    <!-- سيتم إضافة المحتوى الديناميكي هنا -->
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <!-- Review Section -->
+    <section id="review-section" class="content-section active">
+      <div class="section-header">
+        <h2 class="section-title">قسم المراجعة</h2>
+        <p class="section-subtitle">درجة النجاح: 95% - يظهر فقط "ناجح" أو "غير مكتمل"</p>
+      </div>
+      <div id="review-content" class="calculator-area">
+        <!-- Dynamic content will be loaded here -->
+      </div>
+    </section>
+
+    <!-- Testing Section -->
+    <section id="testing-section" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">قسم الاختبارات</h2>
+        <p class="section-subtitle">اختر نوع الاختبار المطلوب</p>
+      </div>
+      <div class="sub-navigation">
+        <button class="sub-nav-btn active" onclick="showTestType('monthly')">الاختبار الشهري</button>
+        <button class="sub-nav-btn" onclick="showTestType('cumulative')">الاختبار التراكمي</button>
+      </div>
+      <div id="testing-content" class="calculator-area">
+        <!-- Dynamic content will be loaded here -->
+      </div>
+    </section>
+
+    <!-- Consolidation Section -->
+    <section id="consolidation-section" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">قسم التثبيت</h2>
+        <p class="section-subtitle">جدول التثبيت والمتابعة</p>
+      </div>
+      <div id="consolidation-content" class="calculator-area">
+        <!-- Dynamic content will be loaded here -->
+      </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz-section" class="content-section">
+      <div class="section-header">
+        <h2 class="section-title">قسم المسابقات</h2>
+        <p class="section-subtitle">حاسبة المسابقات التنافسية</p>
+      </div>
+      <div id="quiz-content" class="calculator-area">
+        <!-- Dynamic content will be loaded here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Results Display Area -->
+  <div id="result-content" class="result-container">
+    <!-- Results will be displayed here -->
   </div>
 
-  <div id="result-content">
-    <!-- سيتم إضافة نتائج الاختبار هنا -->
-  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">ملتقى تيجان النور - نسعى لنور تٌرفع به الأمّة</p>
+      <div class="footer-decoration"></div>
+    </div>
+  </footer>
 
   <script src="Teigan.js"></script>
 </body>
