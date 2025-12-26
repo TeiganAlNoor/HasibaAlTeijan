@@ -44,6 +44,7 @@ function showReviewCalculator() {
   }
 
   var content = '<h3 class="calculator-title">حاسبة المراجعة</h3>' +
+    '<div class="table-container">' +
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
@@ -58,6 +59,7 @@ function showReviewCalculator() {
     '</thead>' +
     '<tbody>' + rows + '</tbody>' +
     '</table>' +
+    '</div>' +
     '<div class="button-container">' +
     '<button class="main-calculate-btn" onclick="calculateReviewResults()">احسب النتائج</button>' +
     '</div>';
@@ -144,6 +146,7 @@ function showTestType(type) {
   }
 
   var content = '<h3 class="calculator-title">' + testName + '</h3>' +
+    '<div class="table-container">' +
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
@@ -158,9 +161,10 @@ function showTestType(type) {
     '</thead>' +
     '<tbody>' + rows + '</tbody>' +
     '</table>' +
+    '</div>' +
     '<div class="button-container">' +
     '<button class="main-calculate-btn" onclick="calculateTestResults(\'' + type + '\')">احسب النتائج</button>' +
-    '</div>';;
+    '</div>';
 
   document.getElementById('testing-content').innerHTML = content;
   document.getElementById('result-content').innerHTML = '';
@@ -244,6 +248,7 @@ function showQuizCalculator() {
   }
 
   var content = '<h3 class="calculator-title">حاسبة المسابقات</h3>' +
+    '<div class="table-container">' +
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
@@ -260,6 +265,7 @@ function showQuizCalculator() {
     '</thead>' +
     '<tbody>' + rows + '</tbody>' +
     '</table>' +
+    '</div>' +
     '<button class="calculate-button" onclick="calculateQuizResults()">احسب النتائج</button>';
 
   document.getElementById('quiz-content').innerHTML = content;
@@ -435,6 +441,7 @@ function showConsolidationCalculator() {
   }
 
   var content = '<h3 class="calculator-title">حاسبة التثبيت</h3>' +
+    '<div class="table-container">' +
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
@@ -449,7 +456,9 @@ function showConsolidationCalculator() {
     '</thead>' +
     '<tbody>' + rows + '</tbody>' +
     '</table>' +
+    '</div>' +
     '<h3 class="calculator-title bonus-title">الأسئلة الإضافية (بونص)</h3>' +
+    '<div class="table-container">' +
     '<table class="bonus-table">' +
     '<thead>' +
     '<tr>' +
@@ -474,6 +483,7 @@ function showConsolidationCalculator() {
     '</tr>' +
     '</tbody>' +
     '</table>' +
+    '</div>' +
     '<div class="button-container">' +
     '<button class="main-calculate-btn" onclick="calculateConsolidationResults()">احسب النتائج</button>' +
     '</div>';
