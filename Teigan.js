@@ -48,12 +48,12 @@ function showReviewCalculator() {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>#</th>' +
-    '<th>الحركات</th>' +
-    '<th>الكلمات</th>' +
-    '<th>الآيات</th>' +
-    '<th>تأتأة+</th>' +
-    '<th>تأتأة-</th>' +
+    '<th>رقم الموضع</th>' +
+    '<th>عدد تصحيح الحركات</th>' +
+    '<th>عدد فتح الكلمات</th>' +
+    '<th>عدد فتح الآيات</th>' +
+    '<th>عدد التأتأة مع تنبيه</th>' +
+    '<th>عدد التأتأة بدون تنبيه</th>' +
     '<th>النتيجة</th>' +
     '</tr>' +
     '</thead>' +
@@ -150,12 +150,12 @@ function showTestType(type) {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>#</th>' +
-    '<th>الحركات</th>' +
-    '<th>الكلمات</th>' +
-    '<th>الآيات</th>' +
-    '<th>تأتأة+</th>' +
-    '<th>تأتأة-</th>' +
+    '<th>رقم الموضع</th>' +
+    '<th>عدد تصحيح الحركات</th>' +
+    '<th>عدد فتح الكلمات</th>' +
+    '<th>عدد فتح الآيات</th>' +
+    '<th>عدد التأتأة مع تنبيه</th>' +
+    '<th>عدد التأتأة بدون تنبيه</th>' +
     '<th>النتيجة</th>' +
     '</tr>' +
     '</thead>' +
@@ -252,13 +252,13 @@ function showQuizCalculator() {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>#</th>' +
-    '<th>الحركات</th>' +
-    '<th>الكلمات</th>' +
-    '<th>الآيات</th>' +
-    '<th>تأتأة+</th>' +
-    '<th>تأتأة-</th>' +
-    '<th>الأحكام</th>' +
+    '<th>رقم الموضع</th>' +
+    '<th>عدد تصحيح الحركات</th>' +
+    '<th>عدد فتح الكلمات</th>' +
+    '<th>عدد فتح الآيات</th>' +
+    '<th>عدد التأتأة مع تنبيه</th>' +
+    '<th>عدد التأتأة بدون تنبيه</th>' +
+    '<th>أحكام الميم والنون</th>' +
     '<th>المعاني</th>' +
     '<th>النتيجة</th>' +
     '</tr>' +
@@ -445,12 +445,12 @@ function showConsolidationCalculator() {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>#</th>' +
-    '<th>الحركات</th>' +
-    '<th>الكلمات</th>' +
-    '<th>الآيات</th>' +
-    '<th>تأتأة+</th>' +
-    '<th>تأتأة-</th>' +
+    '<th>رقم الموضع</th>' +
+    '<th>عدد تصحيح الحركات</th>' +
+    '<th>عدد فتح الكلمات</th>' +
+    '<th>عدد فتح الآيات</th>' +
+    '<th>عدد التأتأة مع تنبيه</th>' +
+    '<th>عدد التأتأة بدون تنبيه</th>' +
     '<th>النتيجة</th>' +
     '</tr>' +
     '</thead>' +
@@ -462,22 +462,22 @@ function showConsolidationCalculator() {
     '<table class="bonus-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>#</th>' +
+    '<th>رقم السؤال</th>' +
     '<th>السؤال</th>' +
-    '<th>صحيح</th>' +
-    '<th>النقاط</th>' +
+    '<th>الإجابة الصحيحة</th>' +
+    '<th>النقاط الإضافية</th>' +
     '</tr>' +
     '</thead>' +
     '<tbody>' +
     '<tr>' +
-    '<td>1</td>' +
-    '<td>سؤال إضافي 1</td>' +
+    '<td>إضافي 1</td>' +
+    '<td>سؤال إضافي رقم 1</td>' +
     '<td><label class="checkbox-container"><input type="checkbox" class="bonus-q1" onchange="updateBonusPoints()"><span class="checkmark"></span></label></td>' +
     '<td><span class="bonus-points" id="bonus-q1-points">0</span></td>' +
     '</tr>' +
     '<tr>' +
-    '<td>2</td>' +
-    '<td>سؤال إضافي 2</td>' +
+    '<td>إضافي 2</td>' +
+    '<td>سؤال إضافي رقم 2</td>' +
     '<td><label class="checkbox-container"><input type="checkbox" class="bonus-q2" onchange="updateBonusPoints()"><span class="checkmark"></span></label></td>' +
     '<td><span class="bonus-points" id="bonus-q2-points">0</span></td>' +
     '</tr>' +

@@ -1278,6 +1278,44 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 10px;
   }
 
+  .bonus-table {
+    font-size: 0.6rem;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .bonus-table th,
+  .bonus-table td {
+    padding: 6px 3px;
+    font-size: 0.6rem;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .bonus-table th {
+    font-size: 0.55rem;
+  }
+
+  .bonus-table th:first-child,
+  .bonus-table td:first-child {
+    width: 15%;
+  }
+
+  .bonus-table th:nth-child(2),
+  .bonus-table td:nth-child(2) {
+    width: 40%;
+  }
+
+  .bonus-table th:nth-child(3),
+  .bonus-table td:nth-child(3) {
+    width: 25%;
+  }
+
+  .bonus-table th:last-child,
+  .bonus-table td:last-child {
+    width: 20%;
+  }
+
   .bonus-table-container h4 {
     font-size: 1rem;
   }
