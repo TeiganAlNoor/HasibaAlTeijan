@@ -1703,6 +1703,27 @@ input[type="number"]::-webkit-outer-spin-button {
   box-shadow: var(--shadow-light);
 }
 
+/* ===== QUIZ NOTE STYLES ===== */
+.quiz-note {
+  background: linear-gradient(135deg, rgba(199, 156, 102, 0.1), rgba(3, 159, 158, 0.1));
+  border-right: 4px solid var(--primary-golden);
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: right;
+}
+
+.quiz-note p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+  line-height: 1.6;
+}
+
+.quiz-note strong {
+  color: var(--primary-teal);
+}
+
 /* ===== ADDITIONAL MOBILE IMPROVEMENTS ===== */
 .table-container {
   width: 100%;
@@ -1727,5 +1748,30 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .bonus-title {
     margin-top: 20px;
+  }
+
+  .quiz-note {
+    padding: 10px 12px;
+    margin-bottom: 15px;
+  }
+
+  .quiz-note p {
+    font-size: 0.75rem;
+    margin: 3px 0;
+  }
+
+  /* Even smaller bonus table on mobile */
+  .bonus-table {
+    font-size: 0.55rem !important;
+  }
+
+  .bonus-table th,
+  .bonus-table td {
+    padding: 5px 2px !important;
+    font-size: 0.55rem !important;
+  }
+
+  .bonus-table th {
+    font-size: 0.5rem !important;
   }
 }

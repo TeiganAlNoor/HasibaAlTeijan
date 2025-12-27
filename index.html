@@ -75,7 +75,7 @@
     <div class="nav-container">
       <button class="nav-tab active" onclick="switchSection('review')" data-section="review">
         <span class="nav-icon">📖</span>
-        <span class="nav-text">المراجعة</span>
+        <span class="nav-text">اتصال المراجعة التراكميّ</span>
       </button>
       <button class="nav-tab" onclick="switchSection('testing')" data-section="testing">
         <span class="nav-icon">📝</span>
@@ -103,7 +103,7 @@
     <!-- Review Section -->
     <section id="review-section" class="content-section active">
       <div class="section-header">
-        <h2 class="section-title">قسم المراجعة</h2>
+        <h2 class="section-title">قسم اتصال المراجعة التراكميّ</h2>
         <p class="section-subtitle">درجة النجاح: 95% - يظهر فقط "ناجح" أو "غير مكتمل"</p>
       </div>
       <div id="review-content" class="calculator-area">
@@ -142,6 +142,10 @@
       <div class="section-header">
         <h2 class="section-title">قسم المسابقات</h2>
         <p class="section-subtitle">حاسبة المسابقات التنافسية</p>
+      </div>
+      <div class="sub-navigation">
+        <button class="sub-nav-btn active" onclick="showQuizType('positions')">المواضع</button>
+        <button class="sub-nav-btn" onclick="showQuizType('narration')">السرد</button>
       </div>
       <div id="quiz-content" class="calculator-area">
         <!-- Dynamic content will be loaded here -->

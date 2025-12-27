@@ -43,7 +43,7 @@ function showReviewCalculator() {
       '</tr>';
   }
 
-  var content = '<h3 class="calculator-title">حاسبة المراجعة</h3>' +
+  var content = '<h3 class="calculator-title">حاسبة اتصال المراجعة التراكميّ</h3>' +
     '<div class="table-container">' +
     '<table class="calculator-table">' +
     '<thead>' +
@@ -97,7 +97,7 @@ function calculateReviewResults() {
     '<tbody>' +
     '<tr>' +
     '<td>نوع التقييم</td>' +
-    '<td>المراجعة</td>' +
+    '<td>اتصال المراجعة التراكميّ</td>' +
     '</tr>' +
     '<tr>' +
     '<td>الحالة</td>' +
@@ -230,10 +230,27 @@ function calculateTestResults(type) {
   }
 }
 
-// ===== QUIZ SECTION =====
+// ===== QUIZ SECTION (Positions and Narration) =====
 function showQuizCalculator() {
+  showQuizType('positions');
+}
+
+function showQuizType(type) {
+  // Update sub-nav buttons
+  document.querySelectorAll('#quiz-section .sub-nav-btn').forEach(function (btn) {
+    btn.classList.remove('active');
+  });
+  if (event && event.target) {
+    event.target.classList.add('active');
+  } else {
+    document.querySelector('#quiz-section .sub-nav-btn').classList.add('active');
+  }
+
+  var rowCount = type === 'positions' ? 3 : 1;
+  var quizName = type === 'positions' ? 'المواضع' : 'السرد';
+
   var rows = '';
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < rowCount; i++) {
     rows += '<tr>' +
       '<td>' + (i + 1) + '</td>' +
       '<td><input type="number" class="corrections" min="0" oninput="validateInput(this)"></td>' +
@@ -247,7 +264,11 @@ function showQuizCalculator() {
       '</tr>';
   }
 
-  var content = '<h3 class="calculator-title">حاسبة المسابقات</h3>' +
+  var content = '<h3 class="calculator-title">حاسبة المسابقات - ' + quizName + '</h3>' +
+    '<div class="quiz-note">' +
+    '<p><strong>ملاحظة:</strong> خانة المعاني تعني عدد أخطاء المفردات (يخصم نقطة لكل خطأ)</p>' +
+    '<p>خانة أحكام الميم والنون تعني عدد أخطاء أحكام الميم والنون الساكنة (يخصم 0.5 لكل خطأ)</p>' +
+    '</div>' +
     '<div class="table-container">' +
     '<table class="calculator-table">' +
     '<thead>' +
@@ -266,23 +287,18 @@ function showQuizCalculator() {
     '<tbody>' + rows + '</tbody>' +
     '</table>' +
     '</div>' +
-    '<button class="calculate-button" onclick="calculateQuizResults()">احسب النتائج</button>';
+    '<div class="button-container">' +
+    '<button class="main-calculate-btn" onclick="calculateQuizResults(\'' + type + '\')">احسب النتائج</button>' +
+    '</div>';
 
   document.getElementById('quiz-content').innerHTML = content;
   document.getElementById('result-content').innerHTML = '';
 }
 
-function calculateQuizResults() {
+function calculateQuizResults(type) {
   var totalResult = 0;
-  var totalAhkamMemAndNon = 0;
+  var quizName = type === 'positions' ? 'المواضع' : 'السرد';
 
-  // First calculate total ahkamMemAndNon
-  document.querySelectorAll('#quiz-content tbody tr').forEach(function (row) {
-    var ahkamMemAndNon = parseInt(row.querySelector('.ahkamMemAndNon').value) || 0;
-    totalAhkamMemAndNon += ahkamMemAndNon;
-  });
-
-  // Now calculate results
   document.querySelectorAll('#quiz-content tbody tr').forEach(function (row) {
     var corrections = parseInt(row.querySelector('.corrections').value) || 0;
     var wordOpenings = parseInt(row.querySelector('.word-openings').value) || 0;
@@ -292,21 +308,13 @@ function calculateQuizResults() {
     var ahkamMemAndNon = parseInt(row.querySelector('.ahkamMemAndNon').value) || 0;
     var Meaning = parseInt(row.querySelector('.Meaning').value) || 0;
 
-    if (totalAhkamMemAndNon <= 2) {
-      ahkamMemAndNon = 0;
-    } else if (ahkamMemAndNon > 2) {
-      ahkamMemAndNon -= 2;
-    }
-
-    var result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.1 + Meaning * 2 + ahkamMemAndNon * 0.2;
+    // المعاني: يخصم نقطة لكل خطأ
+    // أحكام الميم والنون: يخصم 0.5 لكل خطأ
+    var result = corrections * 2 + wordOpenings * 1 + verseOpenings * 2 + memorizedNoRecitation * 0.1 + memorizedWithRecitation * 0.5 + ahkamMemAndNon * 0.5 + Meaning * 1;
 
     row.querySelector('.result').textContent = -result.toFixed(1);
     totalResult += result;
   });
-
-  if (totalAhkamMemAndNon > 2) {
-    totalResult = totalResult - 0.4;
-  }
 
   totalResult = 100 - totalResult;
 
@@ -329,7 +337,7 @@ function calculateQuizResults() {
     '<tbody>' +
     '<tr>' +
     '<td>نوع التقييم</td>' +
-    '<td>المسابقات</td>' +
+    '<td>المسابقات - ' + quizName + '</td>' +
     '</tr>' +
     '<tr>' +
     '<td>النتيجة</td>' +
@@ -344,7 +352,7 @@ function calculateQuizResults() {
 
   document.getElementById('result-content').innerHTML = resultContent;
 
-  if (totalResult >= 99) {
+  if (totalResult >= 90) {
     showConfetti();
     var resultElement = document.getElementById('total-result');
     resultElement.style.animation = 'resultPulse 0.6s ease-in-out';
@@ -513,9 +521,9 @@ function calculateConsolidationResults() {
   var q2Checked = document.querySelector('.bonus-q2') ? document.querySelector('.bonus-q2').checked : false;
   var bonusTotal = (q1Checked ? 0.5 : 0) + (q2Checked ? 0.5 : 0);
 
-  // Final result: 100 - deductions + bonus
-  var finalResult = 100 - totalResult + bonusTotal;
-  if (finalResult > 100) finalResult = 100;
+  // Final result: 100 - deductions + bonus (can exceed 100 with bonus)
+  var baseResult = 100 - totalResult;
+  var finalResult = baseResult + bonusTotal;
 
   var status = '';
   var emoji = '';
@@ -536,6 +544,7 @@ function calculateConsolidationResults() {
 
   var date = new Date().toLocaleDateString('ar-EG');
 
+  var bonusDisplay = bonusTotal > 0 ? '+' + bonusTotal.toFixed(1) : '0';
   var resultContent = '<table class="result-table">' +
     '<tbody>' +
     '<tr>' +
@@ -544,11 +553,11 @@ function calculateConsolidationResults() {
     '</tr>' +
     '<tr>' +
     '<td>النتيجة الأساسية</td>' +
-    '<td>' + (100 - totalResult).toFixed(1) + '</td>' +
+    '<td>' + baseResult.toFixed(1) + '</td>' +
     '</tr>' +
     '<tr>' +
     '<td>البونص</td>' +
-    '<td>+' + bonusTotal.toFixed(1) + '</td>' +
+    '<td>' + bonusDisplay + '</td>' +
     '</tr>' +
     '<tr>' +
     '<td>النتيجة النهائية</td>' +
@@ -576,10 +585,10 @@ function updateBonusPoints() {
   var q2Checked = document.querySelector('.bonus-q2') ? document.querySelector('.bonus-q2').checked : false;
 
   if (document.getElementById('bonus-q1-points')) {
-    document.getElementById('bonus-q1-points').textContent = q1Checked ? '0.5' : '0';
+    document.getElementById('bonus-q1-points').textContent = q1Checked ? '+0.5' : '0';
   }
   if (document.getElementById('bonus-q2-points')) {
-    document.getElementById('bonus-q2-points').textContent = q2Checked ? '0.5' : '0';
+    document.getElementById('bonus-q2-points').textContent = q2Checked ? '+0.5' : '0';
   }
 }
 
