@@ -48,7 +48,7 @@ function showReviewCalculator() {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>رقم الموضع</th>' +
+    '<th>#</th>' +
     '<th>عدد تصحيح الحركات</th>' +
     '<th>عدد فتح الكلمات</th>' +
     '<th>عدد فتح الآيات</th>' +
@@ -150,7 +150,7 @@ function showTestType(type) {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>رقم الموضع</th>' +
+    '<th>#</th>' +
     '<th>عدد تصحيح الحركات</th>' +
     '<th>عدد فتح الكلمات</th>' +
     '<th>عدد فتح الآيات</th>' +
@@ -273,7 +273,7 @@ function showQuizType(type) {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>رقم الموضع</th>' +
+    '<th>#</th>' +
     '<th>عدد تصحيح الحركات</th>' +
     '<th>عدد فتح الكلمات</th>' +
     '<th>عدد فتح الآيات</th>' +
@@ -453,7 +453,7 @@ function showConsolidationCalculator() {
     '<table class="calculator-table">' +
     '<thead>' +
     '<tr>' +
-    '<th>رقم الموضع</th>' +
+    '<th>#</th>' +
     '<th>عدد تصحيح الحركات</th>' +
     '<th>عدد فتح الكلمات</th>' +
     '<th>عدد فتح الآيات</th>' +

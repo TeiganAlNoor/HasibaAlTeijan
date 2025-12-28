@@ -1200,20 +1200,28 @@ input[type="number"]::-webkit-outer-spin-button {
   /* First column (position number) smaller */
   th:first-child,
   td:first-child {
-    width: 8%;
+    width: 6%;
   }
 
-  /* Last column (result) smaller */
+  /* Last column (result) - wider */
   th:last-child,
   td:last-child {
-    width: 10%;
+    width: 14%;
+  }
+
+  /* Result values - make them bold and clear */
+  .result {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-teal);
+    display: block;
   }
 
   /* Number inputs on mobile - very compact */
   input[type="number"] {
-    width: 32px;
-    padding: 6px 2px;
-    font-size: 14px;
+    width: 30px;
+    padding: 5px 1px;
+    font-size: 13px;
     border-radius: 6px;
     -webkit-appearance: none;
     -moz-appearance: textfield;
