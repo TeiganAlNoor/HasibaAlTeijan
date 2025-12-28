@@ -246,11 +246,25 @@ function showQuizType(type) {
     document.querySelector('#quiz-section .sub-nav-btn').classList.add('active');
   }
 
-  var rowCount = type === 'positions' ? 3 : 1;
+  var defaultRowCount = type === 'positions' ? 3 : 1;
   var quizName = type === 'positions' ? 'المواضع' : 'السرد';
 
+  // Entry count selector - only for positions, narration is fixed at 1
+  var entrySelector = '';
+  if (type === 'positions') {
+    entrySelector = '<div class="entry-selector">' +
+      '<label for="entry-count">عدد المواضع:</label>' +
+      '<select id="entry-count" onchange="updateQuizRows(\'' + type + '\')">';
+
+    for (var i = 1; i <= 10; i++) {
+      var selected = i === defaultRowCount ? ' selected' : '';
+      entrySelector += '<option value="' + i + '"' + selected + '>' + i + '</option>';
+    }
+    entrySelector += '</select></div>';
+  }
+
   var rows = '';
-  for (var i = 0; i < rowCount; i++) {
+  for (var i = 0; i < defaultRowCount; i++) {
     rows += '<tr>' +
       '<td>' + (i + 1) + '</td>' +
       '<td><input type="number" class="corrections" min="0" oninput="validateInput(this)"></td>' +
@@ -265,6 +279,7 @@ function showQuizType(type) {
   }
 
   var content = '<h3 class="calculator-title">حاسبة المسابقات - ' + quizName + '</h3>' +
+    entrySelector +
     '<div class="quiz-note">' +
     '<p><strong>ملاحظة:</strong> خانة المعاني تعني عدد أخطاء المفردات (يخصم نقطة لكل خطأ)</p>' +
     '<p>خانة أحكام الميم والنون تعني عدد أخطاء أحكام الميم والنون الساكنة (يخصم 0.5 لكل خطأ)</p>' +
@@ -357,6 +372,29 @@ function calculateQuizResults(type) {
     var resultElement = document.getElementById('total-result');
     resultElement.style.animation = 'resultPulse 0.6s ease-in-out';
   }
+}
+
+function updateQuizRows(type) {
+  var rowCount = parseInt(document.getElementById('entry-count').value) || 1;
+  var quizName = type === 'positions' ? 'المواضع' : 'السرد';
+
+  var rows = '';
+  for (var i = 0; i < rowCount; i++) {
+    rows += '<tr>' +
+      '<td>' + (i + 1) + '</td>' +
+      '<td><input type="number" class="corrections" min="0" oninput="validateInput(this)"></td>' +
+      '<td><input type="number" class="word-openings" min="0" oninput="validateInput(this)"></td>' +
+      '<td><input type="number" class="verse-openings" min="0" oninput="validateInput(this)"></td>' +
+      '<td><input type="number" class="memorized-with-recitation" min="0" oninput="validateInput(this)"></td>' +
+      '<td><input type="number" class="memorized-no-recitation" min="0" oninput="validateInput(this)"></td>' +
+      '<td><input type="number" class="ahkamMemAndNon" min="0" oninput="validateInput(this)"></td>' +
+      '<td><input type="number" class="Meaning" min="0" oninput="validateInput(this)"></td>' +
+      '<td><span class="result">0</span></td>' +
+      '</tr>';
+  }
+
+  document.querySelector('#quiz-content tbody').innerHTML = rows;
+  document.getElementById('result-content').innerHTML = '';
 }
 
 // ===== UTILITY FUNCTIONS =====

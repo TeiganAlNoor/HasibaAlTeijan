@@ -616,6 +616,16 @@ body {
   margin-top: 15px;
 }
 
+#review-section .section-subtitle {
+  color: var(--primary-golden);
+  font-weight: 700;
+}
+
+#review-section .section-subtitle {
+  color: var(--primary-golden);
+  font-weight: 700;
+}
+
 /* ===== SUB NAVIGATION ===== */
 .sub-navigation {
   display: flex;
@@ -1070,7 +1080,28 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .brand-tagline {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
+    letter-spacing: 0;
+    text-align: center;
+    display: block;
+    line-height: 1.8;
+    padding: 10px 20px;
+    max-width: 95%;
+    margin: 0 auto;
+    background: rgba(199, 156, 102, 0.15);
+    border-radius: 8px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .brand-tagline::before,
+  .brand-tagline::after {
+    display: none;
+  }
+
+  .header-decoration::before {
+    display: none;
   }
 
   .brand-name span {
@@ -1364,6 +1395,11 @@ input[type="number"]::-webkit-outer-spin-button {
 @media only screen and (max-width: 380px) {
   .brand-name {
     font-size: 1.3rem;
+  }
+
+  .brand-tagline {
+    font-size: 0.95rem;
+    padding: 8px 12px;
   }
 
   .logo {
@@ -1712,6 +1748,44 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* ===== QUIZ NOTE STYLES ===== */
+.entry-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  direction: rtl;
+}
+
+.entry-selector label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-teal);
+}
+
+.entry-selector select {
+  padding: 8px 15px;
+  border: 2px solid var(--primary-teal);
+  border-radius: 8px;
+  background: white;
+  color: var(--dark-gray);
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.entry-selector select:hover {
+  border-color: var(--primary-golden);
+  background: rgba(199, 156, 102, 0.05);
+}
+
+.entry-selector select:focus {
+  outline: none;
+  border-color: var(--primary-golden);
+  box-shadow: 0 0 0 3px rgba(199, 156, 102, 0.1);
+}
+
 .quiz-note {
   background: linear-gradient(135deg, rgba(199, 156, 102, 0.1), rgba(3, 159, 158, 0.1));
   border-right: 4px solid var(--primary-golden);
