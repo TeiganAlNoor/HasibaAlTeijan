@@ -102,6 +102,41 @@
         <h2 class="section-title">قسم اتصال المراجعة التراكميّ</h2>
         <p class="section-subtitle">درجة النجاح: 95% - يظهر فقط "ناجح" أو "غير مكتمل"</p>
       </div>
+      <!-- Quran Page Display Component -->
+      <div class="quran-page-container" id="review-quran-container">
+        <div class="quran-controls">
+          <div class="quran-controls-row">
+            <div class="control-group">
+              <label>السورة:</label>
+              <select id="review-surah-select" onchange="onSurahChange('review')">
+                <option value="">اختر السورة...</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label>من آية:</label>
+              <input type="number" id="review-ayah-start" min="1" value="1">
+            </div>
+            <div class="control-group">
+              <label>إلى آية:</label>
+              <input type="number" id="review-ayah-end" min="1" value="5">
+            </div>
+            <button class="quran-load-btn" onclick="loadVerses('review')">📖 عرض</button>
+          </div>
+          <div class="quran-search-row">
+            <div class="quran-search-box">
+              <input type="text" id="review-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
+                oninput="searchVerseInSection('review')">
+              <div class="verse-search-results hidden" id="review-search-results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="quran-page" id="review-quran-page">
+          <div class="quran-page-placeholder">
+            <span class="placeholder-icon">📖</span>
+            <span>اختر السورة والآيات لعرضها</span>
+          </div>
+        </div>
+      </div>
       <div id="review-content" class="calculator-area">
         <!-- Dynamic content will be loaded here -->
       </div>
@@ -117,6 +152,41 @@
         <button class="sub-nav-btn active" onclick="showTestType('monthly')">الاختبار الشهري</button>
         <button class="sub-nav-btn" onclick="showTestType('cumulative')">الاختبار التراكمي</button>
       </div>
+      <!-- Quran Page Display Component -->
+      <div class="quran-page-container" id="testing-quran-container">
+        <div class="quran-controls">
+          <div class="quran-controls-row">
+            <div class="control-group">
+              <label>السورة:</label>
+              <select id="testing-surah-select" onchange="onSurahChange('testing')">
+                <option value="">اختر السورة...</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label>من آية:</label>
+              <input type="number" id="testing-ayah-start" min="1" value="1">
+            </div>
+            <div class="control-group">
+              <label>إلى آية:</label>
+              <input type="number" id="testing-ayah-end" min="1" value="5">
+            </div>
+            <button class="quran-load-btn" onclick="loadVerses('testing')">📖 عرض</button>
+          </div>
+          <div class="quran-search-row">
+            <div class="quran-search-box">
+              <input type="text" id="testing-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
+                oninput="searchVerseInSection('testing')">
+              <div class="verse-search-results hidden" id="testing-search-results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="quran-page" id="testing-quran-page">
+          <div class="quran-page-placeholder">
+            <span class="placeholder-icon">📖</span>
+            <span>اختر السورة والآيات لعرضها</span>
+          </div>
+        </div>
+      </div>
       <div id="testing-content" class="calculator-area">
         <!-- Dynamic content will be loaded here -->
       </div>
@@ -127,6 +197,41 @@
       <div class="section-header">
         <h2 class="section-title">قسم التثبيت</h2>
         <p class="section-subtitle">جدول التثبيت والمتابعة</p>
+      </div>
+      <!-- Quran Page Display Component -->
+      <div class="quran-page-container" id="consolidation-quran-container">
+        <div class="quran-controls">
+          <div class="quran-controls-row">
+            <div class="control-group">
+              <label>السورة:</label>
+              <select id="consolidation-surah-select" onchange="onSurahChange('consolidation')">
+                <option value="">اختر السورة...</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label>من آية:</label>
+              <input type="number" id="consolidation-ayah-start" min="1" value="1">
+            </div>
+            <div class="control-group">
+              <label>إلى آية:</label>
+              <input type="number" id="consolidation-ayah-end" min="1" value="5">
+            </div>
+            <button class="quran-load-btn" onclick="loadVerses('consolidation')">📖 عرض</button>
+          </div>
+          <div class="quran-search-row">
+            <div class="quran-search-box">
+              <input type="text" id="consolidation-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
+                oninput="searchVerseInSection('consolidation')">
+              <div class="verse-search-results hidden" id="consolidation-search-results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="quran-page" id="consolidation-quran-page">
+          <div class="quran-page-placeholder">
+            <span class="placeholder-icon">📖</span>
+            <span>اختر السورة والآيات لعرضها</span>
+          </div>
+        </div>
       </div>
       <div id="consolidation-content" class="calculator-area">
         <!-- Dynamic content will be loaded here -->
@@ -142,6 +247,41 @@
       <div class="sub-navigation">
         <button class="sub-nav-btn active" onclick="showQuizType('positions')">المواضع</button>
         <button class="sub-nav-btn" onclick="showQuizType('narration')">السرد</button>
+      </div>
+      <!-- Quran Page Display Component -->
+      <div class="quran-page-container" id="quiz-quran-container">
+        <div class="quran-controls">
+          <div class="quran-controls-row">
+            <div class="control-group">
+              <label>السورة:</label>
+              <select id="quiz-surah-select" onchange="onSurahChange('quiz')">
+                <option value="">اختر السورة...</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label>من آية:</label>
+              <input type="number" id="quiz-ayah-start" min="1" value="1">
+            </div>
+            <div class="control-group">
+              <label>إلى آية:</label>
+              <input type="number" id="quiz-ayah-end" min="1" value="5">
+            </div>
+            <button class="quran-load-btn" onclick="loadVerses('quiz')">📖 عرض</button>
+          </div>
+          <div class="quran-search-row">
+            <div class="quran-search-box">
+              <input type="text" id="quiz-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
+                oninput="searchVerseInSection('quiz')">
+              <div class="verse-search-results hidden" id="quiz-search-results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="quran-page" id="quiz-quran-page">
+          <div class="quran-page-placeholder">
+            <span class="placeholder-icon">📖</span>
+            <span>اختر السورة والآيات لعرضها</span>
+          </div>
+        </div>
       </div>
       <div id="quiz-content" class="calculator-area">
         <!-- Dynamic content will be loaded here -->
