@@ -43,11 +43,11 @@ function showReviewSubType(subType) {
   document.querySelectorAll('#review-section .sub-nav-btn').forEach(function (btn) {
     btn.classList.remove('active');
   });
-  if (event && event.target) {
-    event.target.classList.add('active');
-  } else {
-    document.querySelector('#review-section .sub-nav-btn').classList.add('active');
-  }
+  // Find the correct button to activate based on subType
+  var targetBtn = subType === 'save'
+    ? document.querySelector('#review-section .sub-nav-btn:first-child')
+    : document.querySelector('#review-section .sub-nav-btn:last-child');
+  if (targetBtn) targetBtn.classList.add('active');
 
   var rowCount = subType === 'save' ? 3 : 4;
   var calcTitle = subType === 'save' ? 'حاسبة حفظ للمراجعة' : 'حاسبة التثبيت';
@@ -168,11 +168,10 @@ function showTestType(type) {
   document.querySelectorAll('#testing-section .sub-nav-btn').forEach(function (btn) {
     btn.classList.remove('active');
   });
-  if (event && event.target) {
-    event.target.classList.add('active');
-  } else {
-    document.querySelector('#testing-section .sub-nav-btn').classList.add('active');
-  }
+  var targetBtn = type === 'monthly'
+    ? document.querySelector('#testing-section .sub-nav-btn:first-child')
+    : document.querySelector('#testing-section .sub-nav-btn:last-child');
+  if (targetBtn) targetBtn.classList.add('active');
 
   var rowCount = type === 'monthly' ? 5 : 7;
   var testName = type === 'monthly' ? 'الاختبار الشهري' : 'الاختبار التراكمي';
@@ -285,11 +284,10 @@ function showQuizType(type) {
   document.querySelectorAll('#quiz-section .sub-nav-btn').forEach(function (btn) {
     btn.classList.remove('active');
   });
-  if (event && event.target) {
-    event.target.classList.add('active');
-  } else {
-    document.querySelector('#quiz-section .sub-nav-btn').classList.add('active');
-  }
+  var targetBtn = type === 'positions'
+    ? document.querySelector('#quiz-section .sub-nav-btn:first-child')
+    : document.querySelector('#quiz-section .sub-nav-btn:last-child');
+  if (targetBtn) targetBtn.classList.add('active');
 
   var defaultRowCount = type === 'positions' ? 3 : 1;
   var quizName = type === 'positions' ? 'المواضع' : 'السرد';
@@ -811,8 +809,8 @@ function loadVerses(section) {
     '<span>جاري تحميل الآيات...</span>' +
     '</div>';
 
-  // Build API URL for range
-  var apiUrl = 'https://api.alquran.cloud/v1/surah/' + surahNumber + '/ar';
+  // Build API URL for range - use quran-uthmani for accurate Uthmani script
+  var apiUrl = 'https://api.alquran.cloud/v1/surah/' + surahNumber + '/quran-uthmani';
 
   fetch(apiUrl)
     .then(function (response) {
@@ -1382,7 +1380,7 @@ function loadVersesWithHighlight(section, highlightAyah) {
     '<span>جاري تحميل الآيات...</span>' +
     '</div>';
 
-  var apiUrl = 'https://api.alquran.cloud/v1/surah/' + surahNumber + '/ar';
+  var apiUrl = 'https://api.alquran.cloud/v1/surah/' + surahNumber + '/quran-uthmani';
 
   fetch(apiUrl)
     .then(function (response) {
