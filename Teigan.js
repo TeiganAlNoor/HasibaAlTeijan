@@ -28,10 +28,32 @@ function switchSection(sectionName) {
   }
 }
 
-// ===== REVIEW SECTION (95% passing, shows only Pass/Incomplete) =====
+// ===== REVIEW SECTION (95% passing) =====
+// Track current review sub-type
+var currentReviewSubType = 'save';
+
 function showReviewCalculator() {
+  showReviewSubType('save');
+}
+
+function showReviewSubType(subType) {
+  currentReviewSubType = subType;
+
+  // Update sub-nav buttons
+  document.querySelectorAll('#review-section .sub-nav-btn').forEach(function (btn) {
+    btn.classList.remove('active');
+  });
+  if (event && event.target) {
+    event.target.classList.add('active');
+  } else {
+    document.querySelector('#review-section .sub-nav-btn').classList.add('active');
+  }
+
+  var rowCount = subType === 'save' ? 3 : 4;
+  var calcTitle = subType === 'save' ? 'حاسبة حفظ للمراجعة' : 'حاسبة التثبيت';
+
   var rows = '';
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < rowCount; i++) {
     rows += '<tr>' +
       '<td>' + (i + 1) + '</td>' +
       '<td><input type="number" class="corrections" min="0" oninput="validateInput(this)"></td>' +
@@ -43,7 +65,7 @@ function showReviewCalculator() {
       '</tr>';
   }
 
-  var content = '<h3 class="calculator-title">حاسبة اتصال المراجعة التراكميّ</h3>' +
+  var content = '<h3 class="calculator-title">' + calcTitle + '</h3>' +
     '<div class="table-container">' +
     '<table class="calculator-table">' +
     '<thead>' +
@@ -86,22 +108,45 @@ function calculateReviewResults() {
 
   totalResult = 100 - totalResult;
 
-  // Review section: 95% passing grade, show only "ناجح" or "غير مكتمل"
-  var isPassing = totalResult >= 95;
-  var statusText = isPassing ? '✅ ناجح' : '❌ غير مكتمل';
-  var statusClass = isPassing ? 'result-pass' : 'result-incomplete';
+  // Determine grade based on score
+  var grade = '';
+  var emoji = '';
+  var statusClass = '';
+
+  if (totalResult >= 99) {
+    grade = 'امتياز';
+    emoji = '🥳';
+    statusClass = 'result-pass';
+  } else if (totalResult >= 97) {
+    grade = 'ممتاز';
+    emoji = '😎';
+    statusClass = 'result-pass';
+  } else if (totalResult >= 95) {
+    grade = 'جيد جداً';
+    emoji = '😁';
+    statusClass = 'result-pass';
+  } else {
+    grade = 'غير مكتمل';
+    emoji = '❌';
+    statusClass = 'result-incomplete';
+  }
 
   var date = new Date().toLocaleDateString('ar-EG');
+  var subTypeName = currentReviewSubType === 'save' ? 'حفظ للمراجعة' : 'التثبيت';
 
   var resultContent = '<table class="result-table">' +
     '<tbody>' +
     '<tr>' +
     '<td>نوع التقييم</td>' +
-    '<td>اتصال المراجعة التراكميّ</td>' +
+    '<td>اتصال المراجعة التراكميّ - ' + subTypeName + '</td>' +
     '</tr>' +
     '<tr>' +
-    '<td>الحالة</td>' +
-    '<td><span id="total-result" class="' + statusClass + '">' + statusText + '</span></td>' +
+    '<td>النتيجة</td>' +
+    '<td><span id="total-result" class="' + statusClass + '">' + totalResult.toFixed(1) + ' ' + emoji + ' ' + grade + '</span></td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td>التقدير</td>' +
+    '<td>' + grade + '</td>' +
     '</tr>' +
     '<tr>' +
     '<td>التاريخ</td>' +
@@ -112,7 +157,7 @@ function calculateReviewResults() {
 
   document.getElementById('result-content').innerHTML = resultContent;
 
-  if (isPassing) {
+  if (totalResult >= 95) {
     showConfetti();
   }
 }
