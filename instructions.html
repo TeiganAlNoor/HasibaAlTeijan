@@ -5,6 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تعليمات الحاسبة - تيجان</title>
+  <meta name="theme-color" content="#027a79">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicons/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicons/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicons/android-chrome-512x512.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -306,10 +314,9 @@
     }
   </style>
   <style>
-    #text-sources a { color: var(--teal-dark); text-underline-offset: .2em; overflow-wrap: anywhere; }
-    #text-sources p { margin-block-end: 12px; }
-    #text-sources summary { cursor: pointer; font-weight: 700; color: var(--teal-dark); padding-block: 10px; }
-    #text-sources .license-notice { white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; font-size: .9rem; padding: 16px; background: var(--background-light); border-radius: 8px; margin-block: 12px; }
+    .quran-quote { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 0; }
+    .quran-quote-verse { font-size: 1.5rem; font-weight: 700; line-height: 2; color: var(--primary-teal); text-wrap: balance; }
+    .quran-quote-ref { font-size: 1rem; color: var(--text-dark); }
   </style>
 </head>
 
@@ -419,42 +426,12 @@
 
     </div>
 
-    <section id="text-sources" class="instruction-card" aria-labelledby="sources-title">
-      <div class="instruction-header"><h2 id="sources-title" class="instruction-title">مصادر النص والتراخيص</h2></div>
-      <div class="instruction-body">
-        <p>مصدر نسختي النص العثماني والإملائي هو <a href="https://alquran.cloud" target="_blank" rel="noopener">AlQuran Cloud / Islamic Network</a>، الذي يُقرّ بمصادره ومنها <a href="https://tanzil.net" target="_blank" rel="noopener">مشروع تنزيل — Tanzil Project</a> وQuran Academy. النص الأصلي محفوظ دون تغيير؛ التطبيع خاص بفهرس البحث ولا يُطبّق على النص المعروض.</p>
-        <p lang="en" dir="ltr">Tanzil Quran Text — Copyright (C) 2007-2021 Tanzil Project. License: Creative Commons Attribution 3.0.</p>
-        <p><a href="https://tanzil.net/docs/text_license" target="_blank" rel="noopener">شروط ترخيص نص تنزيل</a> · <a href="https://tanzil.net/updates/" target="_blank" rel="noopener">تحديثات تنزيل</a> · <a href="https://alquran.cloud/terms-and-conditions" target="_blank" rel="noopener">شروط AlQuran Cloud</a></p>
-        <p>خط النص القرآني وعناوين السور هو Noto Sans Arabic محليًا. <a href="assets/fonts/OFL.txt" target="_blank" rel="noopener">ترخيص الخط SIL Open Font License</a> · <a href="assets/quran/ATTRIBUTION.txt" target="_blank" rel="noopener">ملف الإسناد والترخيص الكامل</a>.</p>
-        <details><summary>إشعار ترخيص نص تنزيل الكامل</summary><div class="license-notice" lang="en" dir="ltr">Tanzil Quran Text
-Copyright (C) 2007-2021 Tanzil Project
-License: Creative Commons Attribution 3.0
-
-This copy of the Quran text is carefully produced, highly
-verified and continuously monitored by a group of specialists
-in Tanzil Project.
-
-TERMS OF USE:
-
-- Permission is granted to copy and distribute verbatim copies
-  of this text, but CHANGING IT IS NOT ALLOWED.
-- This Quran text can be used in any website or application,
-  provided that its source (Tanzil Project) is clearly indicated,
-  and a link is made to tanzil.net to enable users to keep
-  track of changes.
-- This copyright notice shall be included in all verbatim copies
-  of the text, and shall be reproduced appropriately in all files
-  derived from or containing substantial portion of this text.
-
-Please check updates at: http://tanzil.net/updates/</div></details>
-      </div>
-    </section>
-
     <!-- Footer Note -->
     <div class="footer-note">
       <div class="footer-note-icon">⭐</div>
-      <p>
-        <strong>ملاحظة هامة:</strong> يهدف نظام التقييم إلى تشجيع الطلاب على الإتقان والدقة في الحفظ والتلاوة. كلما قلّت الأخطاء، ارتفعت الدرجة النهائية.
+      <p class="quran-quote">
+        <span class="quran-quote-verse">﴿وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِنْ مُدَّكِرٍ﴾</span>
+        <span class="quran-quote-ref">— القمر: 17</span>
       </p>
     </div>
 

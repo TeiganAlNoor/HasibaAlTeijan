@@ -57,15 +57,23 @@ function initialize() {
         failPending(error);
       }
     });
+    // A worker that cannot start (blocked module worker, MIME/CSP problem,
+    // unreadable startup message) must not disable the Quran features: use the
+    // same validated index on the main thread. After a successful start, a crash
+    // rejects pending searches and the next call creates a fresh worker.
+    const fail = error => {
+      if (hasLoaded) { failPending(error); return; }
+      worker = null;
+      instance.terminate();
+      loadFallback().then(resolve, reject);
+    };
     instance.addEventListener('error', event => {
-      const error = new Error(event.message || 'تعذر تشغيل عامل بحث المصحف.');
-      if (!hasLoaded) reject(error);
-      failPending(error);
+      if (instance !== worker) return;
+      fail(new Error(event.message || 'تعذر تشغيل عامل بحث المصحف.'));
     });
     instance.addEventListener('messageerror', () => {
-      const error = new Error('تعذر قراءة استجابة بحث المصحف.');
-      if (!hasLoaded) reject(error);
-      failPending(error);
+      if (instance !== worker) return;
+      fail(new Error('تعذر قراءة استجابة بحث المصحف.'));
     });
   });
 }

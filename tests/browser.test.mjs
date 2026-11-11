@@ -957,14 +957,10 @@ test('Chromium: calculator, shared Mushaf, Arabic search, mobile and accessibili
         points: [...document.querySelectorAll('.instruction-points')].map(node => node.textContent.trim()),
         overflow: document.documentElement.scrollWidth > innerWidth,
       }));
-      assert.deepEqual(outline.levels, [1, 2, 2, 2, 2, 2, 2, 2, 2]);
+      assert.deepEqual(outline.levels, [1, 2, 2, 2, 2, 2, 2, 2]);
       assert.deepEqual(outline.points, ['-0.1', '-0.5', '-2', '-1', '-2']);
       assert.equal(outline.overflow, false, `instructions overflow at ${width}`);
-      const sources = await page.$eval('#text-sources', section => ({ text: section.textContent, heading: section.querySelector('h2')?.textContent.trim(), links: [...section.querySelectorAll('a')].map(a => a.href) }));
-      assert.equal(sources.heading, 'مصادر النص والتراخيص');
-      assert.ok(sources.text.includes('Tanzil') && /AlQuran\s*Cloud/u.test(sources.text));
-      assert.ok(sources.links.some(link => link.startsWith('https://tanzil.net/')));
-      assert.ok(sources.links.some(link => link.startsWith('https://alquran.cloud/')));
+      assert.equal(await page.$('#text-sources'), null, 'the text sources section was removed from the guide');
     }
   });
 

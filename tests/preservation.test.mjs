@@ -20,13 +20,13 @@ const { default: puppeteer } = await import(/^[A-Za-z]:[\\/]|^\//u.test(modulePa
 const chrome = process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
 test('original stylesheet, full keyframe cascade, instructions styles and confetti implementation are preserved', async () => {
-  assert.equal(text(await readFile(new URL('TeiganCss.css', root))), text(original('TeiganCss.css')));
+  assert.equal(text(await readFile(new URL('css/TeiganCss.css', root))), text(original('TeiganCss.css')));
   const oldGuide = text(original('instructions.html')).match(/<style>([\s\S]*?)<\/style>/u)[1];
   const newGuide = text(await readFile(new URL('instructions.html', root))).match(/<style>([\s\S]*?)<\/style>/u)[1];
   assert.equal(newGuide, oldGuide);
   const oldJS = text(original('Teigan.js'));
   const effects = oldJS.slice(oldJS.indexOf('// ===== CONFETTI ANIMATION ====='), oldJS.indexOf('// ===== CONSOLIDATION SECTION')).trim();
-  assert.ok(text(await readFile(new URL('Teigan.js', root))).includes(effects), 'original effect helpers must remain verbatim');
+  assert.ok(text(await readFile(new URL('js/Teigan.js', root))).includes(effects), 'original effect helpers must remain verbatim');
 });
 
 // Use the already pinned canonical data only to make original API responses deterministic.
@@ -69,7 +69,7 @@ async function metrics(page, selector, pseudo = null) {
   }, pseudo);
 }
 
-test('real Chromium baseline comparisons at 320/390/768/1024/1440 and preserved-but-inactive celebrations', { timeout: 300000 }, async t => {
+test('real Chromium baseline comparisons at 320/390/768/1024/1440 and threshold-driven celebrations', { timeout: 300000 }, async t => {
   console.log('Preparing RAM baseline');
   const resources = new Map(['index.html', 'TeiganCss.css', 'Teigan.js', 'instructions.html', 'teigan.png', 'favicon_io/favicon.ico'].map(path => [`/${path}`, original(path)]));
   const server = createServer((request, response) => {
@@ -194,11 +194,11 @@ test('real Chromium baseline comparisons at 320/390/768/1024/1440 and preserved-
       }
       await Promise.all([oldPage.goto(`${oldURL}/instructions.html`), page.goto(`${appURL}/instructions.html`)]);
       await Promise.all([settle(oldPage), settle(page)]);
-      for (const selector of ['.header', '.header-icon', '.intro-card', '.instruction-card', '.instruction-title', '.footer-note', '.footer-note-icon']) assert.deepEqual(await metrics(page, selector), await metrics(oldPage, selector), `${width} instructions ${selector}`);
+      for (const selector of ['.header', '.header-icon', '.intro-card', '.instruction-card', '.instruction-title', '.footer-note-icon']) assert.deepEqual(await metrics(page, selector), await metrics(oldPage, selector), `${width} instructions ${selector}`);
       if (captures) for (const [label, tab] of [['original', oldPage], ['restored', page]]) await tab.screenshot({ path: join(captures, `${width}-${label}-instructions.png`), fullPage: true });
     });
   }
-  await t.test('original confetti and pulse are never invoked by live typing, crossing any original threshold, switching or copying', async () => {
+  await t.test('original confetti and pulse fire once when an exam reaches its original threshold, not on typing, switching or copying', async () => {
     await page.setViewport({ width: 1440, height: 1000 });
     await page.goto(appURL);
     await page.waitForFunction(() => !document.querySelector('#surah-input').disabled, { timeout: 45000 });
@@ -215,22 +215,24 @@ test('real Chromium baseline comparisons at 320/390/768/1024/1440 and preserved-
       await page.$eval(`[data-section="${group}"]`, button => button.click());
       if (group !== 'consolidation') await page.$eval(`[data-exam="${key}"]`, button => button.click());
       const setScore = async score => page.$eval('#marks-body .word-openings', (input, score) => { input.value = 100 - score; input.dispatchEvent(new Event('input', { bubbles: true })); }, score);
+      const schedules = () => page.evaluate(() => window.__confettiSchedules);
+      const before = await schedules();
       await setScore(threshold - 1);
-      assert.equal(await page.evaluate(() => window.__confettiSchedules), 0, `${key} below threshold`);
+      assert.equal(await schedules(), before, `${key} below threshold`);
       await setScore(threshold);
-      assert.equal(await page.evaluate(() => window.__confettiSchedules), 0, `${key} crosses original threshold without celebration`);
-      assert.equal(await page.$eval('#total-result', node => node.style.animation), '');
+      assert.equal(await schedules(), before + 100, `${key} celebrates once on reaching its original threshold`);
+      const pulse = await page.$eval('#total-result', node => node.style.animation);
+      assert.equal(pulse.startsWith('resultPulse'), group !== 'review', `${key} pulse matches the original`);
       await setScore(100);
       await page.$eval('#copy-result', button => button.click());
       await page.waitForFunction(() => typeof window.__preservationCopied === 'string');
-      assert.equal(await page.evaluate(() => window.__confettiSchedules), 0, `${key}: copying does not celebrate`);
       await page.evaluate(() => { window.__preservationCopied = undefined; });
       await page.$eval(`[data-section="${group === 'review' ? 'testing' : 'review'}"]`, button => button.click());
       await page.$eval(`[data-section="${group}"]`, button => button.click());
-      assert.equal(await page.evaluate(() => window.__confettiSchedules), 0, 'draft restoration does not celebrate');
-      const effects = await page.evaluate(() => ({ pieces: document.querySelectorAll('[style*="confettiFall3D"]').length,
-        pulse: document.getAnimations().filter(animation => animation.animationName === 'resultPulse').length }));
-      assert.deepEqual(effects, { pieces: 0, pulse: 0 });
+      assert.equal(await schedules(), before + 100, `${key}: typing above, copying and switching do not repeat it`);
+      await setScore(threshold - 1);
+      await setScore(threshold);
+      assert.equal(await schedules(), before + 200, `${key} re-arms after dropping below the threshold`);
     }
   });
   assert.deepEqual(errors, []);
