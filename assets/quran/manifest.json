@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "downloadedAt": "2026-11-09T18:12:18.831Z",
+  "sources": [
+    {
+      "identifier": "quran-uthmani",
+      "url": "https://api.alquran.cloud/v1/quran/quran-uthmani",
+      "bytes": 2109200,
+      "sha256": "0df03e1d6da4fc8138208fec1688f2b416f0dd4ebbd514179f3e5e0fbaf4195f"
+    },
+    {
+      "identifier": "quran-simple-clean",
+      "url": "https://api.alquran.cloud/v1/quran/quran-simple-clean",
+      "bytes": 1506861,
+      "sha256": "e9f87186120851fbf1e04813a423076850e1b6b9ad769a797117dca623aad4af"
+    }
+  ],
+  "dataset": {
+    "file": "quran.json",
+    "sha256": "2bd99784e0898eb29a25484ebd243ee9464fbfd9cce61e4e9c3f4eeda6ee8a5f",
+    "bytes": 2343752,
+    "surahs": 114,
+    "verses": 6236
+  },
+  "originalVersesSha256": "970a18b699a9b647767f139f3d3fd5b576f21f8049e16711cbd508b7e83a3578",
+  "alignment": {
+    "pairs": 6236,
+    "minimumSimilarity": 0.7727272727272727,
+    "maximumDistance": 24
+  },
+  "note": "Display text is copied verbatim from quran-uthmani. Simple Clean is used only as an independently paired search representation. No Quran text is corrected or synthesized."
+}

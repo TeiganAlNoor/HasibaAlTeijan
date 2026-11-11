@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
@@ -305,6 +305,12 @@
       }
     }
   </style>
+  <style>
+    #text-sources a { color: var(--teal-dark); text-underline-offset: .2em; overflow-wrap: anywhere; }
+    #text-sources p { margin-block-end: 12px; }
+    #text-sources summary { cursor: pointer; font-weight: 700; color: var(--teal-dark); padding-block: 10px; }
+    #text-sources .license-notice { white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; font-size: .9rem; padding: 16px; background: var(--background-light); border-radius: 8px; margin-block: 12px; }
+  </style>
 </head>
 
 <body>
@@ -328,15 +334,15 @@
 
     <!-- Instructions Grid -->
     <div class="instructions-grid">
-      
+
       <!-- إدخال الأرقام -->
       <div class="instruction-card special-card">
         <div class="instruction-header">
           <span class="instruction-icon">⌨️</span>
-          <h3 class="instruction-title">إدخال الأرقام</h3>
+          <h2 class="instruction-title">إدخال الأرقام</h2>
         </div>
         <div class="instruction-body">
-          الحاسبة لا تقبل أحرف أو أرقام سالبة. بعد إدخال مجموع الأخطاء في كل موضع، اضغط على زر <strong>"احسب النتائج"</strong> لعرض النتيجة النهائية.
+          الحاسبة تقبل أعداد الأخطاء الصحيحة فقط؛ لا تقبل أحرفًا أو أرقامًا سالبة أو كسورًا. الخانة الفارغة تساوي صفرًا، وتُحدّث النتيجة تلقائيًا عند كل تعديل صحيح. كتابة 0 تُعد إدخالًا صريحًا؛ ترك جميع الخانات فارغة لا يُظهر نتيجة.
         </div>
       </div>
 
@@ -344,10 +350,10 @@
       <div class="instruction-card special-card">
         <div class="instruction-header">
           <span class="instruction-icon">✅</span>
-          <h3 class="instruction-title">ظهور النتيجة</h3>
+          <h2 class="instruction-title">ظهور النتيجة</h2>
         </div>
         <div class="instruction-body">
-          تظهر النتائج التفصيلية أسفل الصفحة مباشرة بعد الضغط على زر <strong>"احسب النتائج"</strong>، وتتضمن إجمالي النقاط المخصومة والدرجة النهائية.
+          تظهر النتائج التفصيلية تلقائيًا بعد إدخال العلامات. الإدخال غير الصحيح يُخفي النتيجة حتى تصحيحه، ومسح جميع الإدخالات يعيد التقييم إلى الحالة غير المحسوبة. زر النسخ بجانب النتيجة ينسخ التقدير اللفظي للمراجعة، والدرجة الرقمية للأنواع الأخرى.
         </div>
       </div>
 
@@ -355,7 +361,7 @@
       <div class="instruction-card">
         <div class="instruction-header">
           <span class="instruction-icon">🔄</span>
-          <h3 class="instruction-title">التأتأة بدون تنبيه</h3>
+          <h2 class="instruction-title">التأتأة بدون تنبيه</h2>
           <div class="instruction-points">-0.1</div>
         </div>
         <div class="instruction-body">
@@ -367,7 +373,7 @@
       <div class="instruction-card">
         <div class="instruction-header">
           <span class="instruction-icon">⚠️</span>
-          <h3 class="instruction-title">التأتأة مع تنبيه</h3>
+          <h2 class="instruction-title">التأتأة مع تنبيه</h2>
           <div class="instruction-points">-0.5</div>
         </div>
         <div class="instruction-body">
@@ -379,7 +385,7 @@
       <div class="instruction-card">
         <div class="instruction-header">
           <span class="instruction-icon">📖</span>
-          <h3 class="instruction-title">فتح آية</h3>
+          <h2 class="instruction-title">فتح آية</h2>
           <div class="instruction-points">-2</div>
         </div>
         <div class="instruction-body">
@@ -391,7 +397,7 @@
       <div class="instruction-card">
         <div class="instruction-header">
           <span class="instruction-icon">📝</span>
-          <h3 class="instruction-title">فتح كلمة</h3>
+          <h2 class="instruction-title">فتح كلمة</h2>
           <div class="instruction-points">-1</div>
         </div>
         <div class="instruction-body">
@@ -403,7 +409,7 @@
       <div class="instruction-card">
         <div class="instruction-header">
           <span class="instruction-icon">🔤</span>
-          <h3 class="instruction-title">تصحيح حركة</h3>
+          <h2 class="instruction-title">تصحيح حركة</h2>
           <div class="instruction-points">-2</div>
         </div>
         <div class="instruction-body">
@@ -412,6 +418,37 @@
       </div>
 
     </div>
+
+    <section id="text-sources" class="instruction-card" aria-labelledby="sources-title">
+      <div class="instruction-header"><h2 id="sources-title" class="instruction-title">مصادر النص والتراخيص</h2></div>
+      <div class="instruction-body">
+        <p>مصدر نسختي النص العثماني والإملائي هو <a href="https://alquran.cloud" target="_blank" rel="noopener">AlQuran Cloud / Islamic Network</a>، الذي يُقرّ بمصادره ومنها <a href="https://tanzil.net" target="_blank" rel="noopener">مشروع تنزيل — Tanzil Project</a> وQuran Academy. النص الأصلي محفوظ دون تغيير؛ التطبيع خاص بفهرس البحث ولا يُطبّق على النص المعروض.</p>
+        <p lang="en" dir="ltr">Tanzil Quran Text — Copyright (C) 2007-2021 Tanzil Project. License: Creative Commons Attribution 3.0.</p>
+        <p><a href="https://tanzil.net/docs/text_license" target="_blank" rel="noopener">شروط ترخيص نص تنزيل</a> · <a href="https://tanzil.net/updates/" target="_blank" rel="noopener">تحديثات تنزيل</a> · <a href="https://alquran.cloud/terms-and-conditions" target="_blank" rel="noopener">شروط AlQuran Cloud</a></p>
+        <p>خط النص القرآني وعناوين السور هو Noto Sans Arabic محليًا. <a href="assets/fonts/OFL.txt" target="_blank" rel="noopener">ترخيص الخط SIL Open Font License</a> · <a href="assets/quran/ATTRIBUTION.txt" target="_blank" rel="noopener">ملف الإسناد والترخيص الكامل</a>.</p>
+        <details><summary>إشعار ترخيص نص تنزيل الكامل</summary><div class="license-notice" lang="en" dir="ltr">Tanzil Quran Text
+Copyright (C) 2007-2021 Tanzil Project
+License: Creative Commons Attribution 3.0
+
+This copy of the Quran text is carefully produced, highly
+verified and continuously monitored by a group of specialists
+in Tanzil Project.
+
+TERMS OF USE:
+
+- Permission is granted to copy and distribute verbatim copies
+  of this text, but CHANGING IT IS NOT ALLOWED.
+- This Quran text can be used in any website or application,
+  provided that its source (Tanzil Project) is clearly indicated,
+  and a link is made to tanzil.net to enable users to keep
+  track of changes.
+- This copyright notice shall be included in all verbatim copies
+  of the text, and shall be reproduced appropriately in all files
+  derived from or containing substantial portion of this text.
+
+Please check updates at: http://tanzil.net/updates/</div></details>
+      </div>
+    </section>
 
     <!-- Footer Note -->
     <div class="footer-note">

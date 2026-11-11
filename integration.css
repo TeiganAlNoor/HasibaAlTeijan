@@ -1,0 +1,147 @@
+/* Approved functional additions only. TeiganCss.css remains the original visual authority. */
+@font-face {
+  font-family: "Teijan Quran";
+  src: url("assets/fonts/NotoSansArabic-v2.012-e5ee313.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; top: 8px; right: 12px; z-index: 1001; padding: 12px 16px; background: white; color: var(--teal-dark); transform: translateY(-180%); }
+.skip-link:focus { transform: none; }
+:focus-visible { outline: 3px solid var(--primary-golden); outline-offset: 3px; }
+input[aria-invalid="true"] { border-color: #a32929; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+
+/* The single reader and calculator are moved, never cloned or reinitialized. */
+.mushaf-panel, .exam-panel { min-inline-size: 0; }
+.table-scroll { max-inline-size: 100%; overscroll-behavior-inline: contain; scrollbar-color: var(--primary-teal) #f0f9f9; }
+.marks-table input { direction: ltr; font-variant-numeric: tabular-nums; }
+.error-message { color: #a32929; margin-block: 12px; font-weight: 600; }
+.error-message:empty { display: none; }
+.checkbox-label { display: flex; align-items: center; gap: 8px; min-block-size: 32px; inline-size: fit-content; margin-inline: auto; cursor: pointer; font-size: .85rem; color: var(--teal-dark); }
+.checkbox-label input { accent-color: var(--teal-dark); inline-size: 18px; block-size: 18px; }
+.cross-check-control { position: relative; display: inline-flex; flex: 0 0 18px; inline-size: 18px; block-size: 18px; }
+.cross-check-control #cross-surah { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.cross-check-icon { inline-size: 18px; block-size: 18px; fill: none; stroke: var(--teal-dark); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.cross-check-stroke { stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset .3s cubic-bezier(.4,0,.2,1); }
+#cross-surah:checked + .cross-check-icon .cross-check-stroke { stroke-dashoffset: 0; }
+#cross-surah:focus-visible + .cross-check-icon { outline: 3px solid var(--primary-golden); outline-offset: 3px; border-radius: 3px; }
+.cross-range-fields { margin-block-start: 12px; }
+.checkbox-label, #cross-surah, #cross-end-ayah, #copy-result, #reset-marks, #cancel-incomplete { scroll-margin-block-start: var(--navigation-offset, 210px); }
+.surah-combobox { position: relative; min-inline-size: 0; }
+.quran-controls .combobox-input {
+  inline-size: 180px; min-inline-size: 0; padding: 8px 28px 8px 12px; font-size: .95rem;
+  font-family: 'DIN Next LT Arabic', 'Tajawal', sans-serif; border: 2px solid rgba(199,156,102,.4);
+  border-radius: 8px; background: rgba(255,255,255,.95); color: var(--primary-teal); text-align: center;
+}
+.surah-combobox::after { content: ""; position: absolute; inset-inline-end: 12px; inset-block-end: 16px; inline-size: 6px; block-size: 6px; border-inline-end: 2px solid var(--teal-dark); border-block-end: 2px solid var(--teal-dark); transform: rotate(45deg); pointer-events: none; }
+.quran-controls .combobox-input:focus { outline: none; border-color: var(--primary-golden); box-shadow: 0 0 0 3px rgba(199,156,102,.3); }
+.surah-options { position: absolute; inset-inline: 0; z-index: 110; max-block-size: 360px; overflow-y: auto; overscroll-behavior: contain; margin: 0; padding: 5px; list-style: none; background: white; border: 2px solid rgba(3,159,158,.3); border-radius: 10px; box-shadow: 0 10px 30px rgba(3,159,158,.2); }
+.surah-option { padding: 10px 12px; min-block-size: 44px; border-radius: 6px; cursor: pointer; color: var(--teal-dark); }
+.surah-option[aria-selected="true"] { font-weight: 700; }
+.surah-option.option-active, .surah-option:hover { background: #e8f4f4; outline: 2px solid var(--primary-teal); outline-offset: -2px; }
+.option-meta { color: #506866; font-size: .85rem; }
+.no-options, .search-empty { padding: 12px; color: #506866; }
+#verse-search-results { z-index: 110; overscroll-behavior: contain; }
+.search-result { display: block; inline-size: 100%; background: white; border: 0; text-align: right; font: inherit; cursor: pointer; }
+.search-result-meta { display: block; }
+.search-result-text { display: block; }
+#more-search-results { margin: 12px; max-inline-size: calc(100% - 24px); }
+.quran-verses-content, .quran-bismillah, .search-result-text { font-family: "Teijan Quran", "Noto Sans Arabic", "Traditional Arabic", serif; font-synthesis: none; }
+/* Only the displayed Surah titles change family; all original title metrics remain. */
+#quran-page .quran-surah-name { font-family: "Teijan Quran", "Noto Sans Arabic", "Traditional Arabic", serif; }
+.quran-text { letter-spacing: normal; }
+.quran-verse { scroll-margin-block-start: var(--navigation-offset, 210px); }
+.mushaf-pagination { flex-wrap: wrap; align-items: center; }
+.quran-nav-btn:disabled { opacity: 1; }
+#page-status { color: var(--primary-teal); font-size: .9rem; }
+.reader-location { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-block: 12px; color: var(--teal-dark); font-size: .9rem; scroll-margin-block-start: var(--navigation-offset, 210px); }
+.reader-location p { min-inline-size: 0; }
+.reader-progress { margin-block: 12px; color: var(--teal-dark); }
+#page-status { flex: 1 1 100%; text-align: center; }
+
+/* New draft/copy controls borrow the existing teal/gold vocabulary. */
+.draft-actions { display: flex; justify-content: center; margin-block-start: 16px; }
+.secondary, .danger { font-family: 'DIN Next LT Arabic', 'Tajawal', sans-serif; font-size: .95rem; font-weight: 600; min-block-size: 44px; padding: 10px 16px; border: 2px solid var(--primary-golden); border-radius: var(--border-radius); background: white; color: var(--teal-dark); cursor: pointer; }
+.danger { border-color: #c59489; color: #963b29; }
+.action-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.action-icon { flex: 0 0 18px; inline-size: 18px; block-size: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.result-panel { text-align: center; }
+.score-with-copy { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+.field-error { margin-block-start: 8px; color: #963b29; font-size: .8rem; line-height: 1.5; }
+.failure-alert { display: flex; align-items: flex-start; gap: 14px; margin-block-end: 20px; padding: 18px 20px; border: 2px solid var(--warning-orange); border-radius: var(--border-radius); background: #fff7e6; color: #79430d; text-align: start; box-shadow: var(--shadow-light); }
+.failure-heading { font-size: 1.4rem; font-weight: 700; line-height: 1.6; margin-block-end: 4px; }
+.failure-description { font-size: 1rem; line-height: 1.7; }
+.failure-icon { flex: 0 0 32px; inline-size: 32px; block-size: 32px; margin-block-start: 3px; }
+.failure-icon svg { display: block; inline-size: 100%; block-size: 100%; }
+
+/* Feedback only on added controls; original keyframes/transitions stay untouched. */
+:is(#copy-result, #reset-marks, #cancel-incomplete, #reset-dialog button, #copy-dialog button, #more-search-results, #retry-quran, #return-selected),
+.surah-combobox .combobox-input, .surah-options .surah-option,
+.checkbox-label, #cross-surah {
+  transition: transform .3s cubic-bezier(.4,0,.2,1), background-color .3s cubic-bezier(.4,0,.2,1), color .3s cubic-bezier(.4,0,.2,1), border-color .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1), filter .3s cubic-bezier(.4,0,.2,1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .action-button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: var(--shadow-medium); filter: brightness(.97); }
+  .surah-combobox .combobox-input:hover:not(:disabled) { border-color: var(--primary-golden); }
+  .checkbox-label:hover { color: #025858; }
+}
+.action-button:active:not(:disabled) { transform: translateY(-1px); }
+:is(#copy-result, #reset-marks, #cancel-incomplete, #reset-dialog button, #copy-dialog button, #more-search-results, #retry-quran, #return-selected):active:not(:disabled),
+.surah-options .surah-option:active, .checkbox-label:active { filter: brightness(.92); }
+:is(#copy-result, #reset-marks, #cancel-incomplete, #reset-dialog button, #copy-dialog button, #more-search-results, #retry-quran, #return-selected):focus-visible { box-shadow: 0 0 0 3px rgba(199,156,102,.3); }
+@media (prefers-reduced-motion: reduce) {
+  :is(#copy-result, #reset-marks, #cancel-incomplete, #reset-dialog button, #copy-dialog button, #more-search-results, #retry-quran, #return-selected), .surah-combobox .combobox-input, .surah-options .surah-option, .checkbox-label, #cross-surah, .cross-check-stroke { transition-duration: 0s; }
+  .action-button:hover:not(:disabled), .action-button:active:not(:disabled) { transform: none; }
+}
+.bonus-q1:focus-visible + .checkmark, .bonus-q2:focus-visible + .checkmark { outline: 3px solid var(--teal-dark); outline-offset: 4px; }
+
+/* Native top-layer dialogs preserve focus containment, Escape and return focus. */
+dialog { margin: auto; inline-size: min(480px, calc(100% - 32px)); max-block-size: calc(100dvh - 32px); overflow: auto; border: 2px solid var(--primary-golden); border-radius: var(--border-radius-lg); padding: 24px; font-family: 'DIN Next LT Arabic', 'Tajawal', sans-serif; color: var(--teal-dark); background: white; box-shadow: var(--shadow-large); }
+dialog::backdrop { background: rgba(2,88,88,.5); }
+.modal-motion[open] { opacity: 1; transform: none; transform-origin: center; transition: opacity .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1); }
+.modal-motion::backdrop { opacity: 1; transition: opacity .3s cubic-bezier(.4,0,.2,1); }
+.modal-motion:is([data-motion="opening"], [data-motion="closing"]) { opacity: 0; transform: translateY(8px) scale(.97); }
+.modal-motion:is([data-motion="opening"], [data-motion="closing"])::backdrop { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .modal-motion[open], .modal-motion::backdrop { transition-duration: 0s; }
+  .modal-motion:is([data-motion="opening"], [data-motion="closing"]) { transform: none; }
+}
+dialog h2 { margin-block-end: 12px; font-size: 1.3rem; }
+dialog p { margin-block-end: 16px; }
+dialog input { inline-size: 100%; min-block-size: 44px; padding: 10px 12px; border: 2px solid var(--primary-golden); border-radius: 8px; font: inherit; }
+.dialog-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 20px; }
+.dialog-actions button { flex: 1 1 150px; }
+.toast { position: fixed; inset-block-end: max(20px, env(safe-area-inset-bottom)); inset-inline: 16px; z-index: 201; inline-size: fit-content; max-inline-size: min(560px, calc(100% - 32px)); margin-inline: auto; padding: 12px 16px; border-radius: 12px; background: var(--teal-dark); color: white; box-shadow: var(--shadow-medium); pointer-events: none; }
+
+/* Only mobile is intentionally different: readable, locally scrolling marks. */
+@media (max-width: 576px) {
+  .table-scroll, #bonus-controls .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .marks-table { min-inline-size: 740px; table-layout: fixed; font-size: .95rem; }
+  .marks-table[data-quiz="true"] { min-inline-size: 940px; }
+  .marks-table th, .marks-table td { padding: 12px; white-space: normal; }
+  .marks-table th { font-size: .85rem; line-height: 1.6; }
+  .marks-table th:first-child, .marks-table td:first-child { width: 54px; }
+  .marks-table th:last-child, .marks-table td:last-child { width: 72px; }
+  .marks-table input[type="number"] { width: 70px; height: 46px; min-width: 0; padding: 8px; font-size: 16px; border-width: 2px; border-radius: 8px; }
+  #table-hint { position: static; width: auto; height: auto; margin: 12px 0; clip-path: none; white-space: normal; font-size: .85rem; color: var(--teal-dark); }
+  .quran-controls-row .control-group { min-inline-size: 0; max-inline-size: 100%; }
+  .quran-controls .surah-combobox { flex: 1 1 100%; }
+  .quran-controls .combobox-input { inline-size: 100%; min-block-size: 44px; font-size: 16px; }
+  .quran-controls input[type="number"] { min-block-size: 44px; width: 80px; font-size: 16px; padding: 8px 12px; }
+  .quran-load-btn, .quran-nav-btn, .checkbox-label { min-block-size: 44px; }
+  .quran-search-box input { min-block-size: 44px; font-size: 16px; }
+  .cross-range-fields .control-group { flex: 1 1 100%; }
+  .surah-options, #verse-search-results { max-inline-size: 100%; }
+  .search-result { overflow-wrap: anywhere; }
+  .bonus-table { min-inline-size: 400px; font-size: .95rem; }
+  /* The original mobile bonus declarations are !important; override only here. */
+  #bonus-controls .bonus-table th, #bonus-controls .bonus-table td { font-size: .85rem !important; padding: 12px !important; }
+  .checkbox-container { min-width: 44px; min-height: 44px; }
+  .checkbox-container .checkmark { top: 9px; left: 9px; }
+  .result-table td { padding: 12px; overflow-wrap: anywhere; }
+  dialog { padding: 16px; }
+  #page-status { position: static; width: auto; height: auto; margin: 0; clip-path: none; white-space: normal; flex: 1 1 100%; text-align: center; }
+}
