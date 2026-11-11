@@ -60,6 +60,11 @@ button:disabled { cursor: not-allowed; opacity: .55; }
 .reader-location { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-block: 12px; color: var(--teal-dark); font-size: .9rem; scroll-margin-block-start: var(--navigation-offset, 210px); }
 .reader-location p { min-inline-size: 0; }
 .reader-progress { margin-block: 12px; color: var(--teal-dark); }
+/* Mark fields have no spin arrows: nudging them by mouse made marks jump unexpectedly. */
+.marks-table input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.marks-table input[type="number"]::-webkit-inner-spin-button,
+.marks-table input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+
 /* Previous/next share the first row; the status text sits on its own row below them. */
 #page-status { order: 1; flex: 1 1 100%; text-align: center; }
 

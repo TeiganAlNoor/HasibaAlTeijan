@@ -172,7 +172,7 @@ export function createExamStore() {
     return get(key);
   }
 
-  function recompute(draft, throwOnInvalid = false) {
+  function recompute(draft, throwOnInvalid = false, force = false) {
     const errors = errorsFor(draft);
     draft.result = null;
     if (errors.length) {
@@ -180,7 +180,7 @@ export function createExamStore() {
       return null;
     }
     // Blank fields count as zero, but untouched or inactive-only drafts have no score.
-    if (!hasActivity(draft)) return null;
+    if (!force && !hasActivity(draft)) return null;
     const key = draft.key;
     const current = EXAM_CONFIGS[key];
     // Integer tenths implement the existing weights without floating-point threshold drift.
@@ -206,8 +206,10 @@ export function createExamStore() {
   }
 
   // Kept for callers that explicitly need validation; ordinary mutations recalculate safely.
-  function calculate(key) {
-    return recompute(draftFor(key), true);
+  // `force` scores an untouched draft too (all blanks = zero errors = full marks),
+  // which is what pressing the calculate button did in the original calculator.
+  function calculate(key, { force = false } = {}) {
+    return recompute(draftFor(key), true, force);
   }
 
   function resetCurrent(key) {

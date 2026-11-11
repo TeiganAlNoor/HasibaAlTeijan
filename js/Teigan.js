@@ -1,4 +1,4 @@
-import { EXAM_CONFIGS, createExamStore } from './exam-model.mjs';
+import { EXAM_CONFIGS, ExamValidationError, createExamStore } from './exam-model.mjs';
 import { normalizeQuran } from './quran-search.mjs';
 import { loadQuran, searchQuran } from './quran-client.mjs';
 import { SurahCombobox } from './surah-combobox.mjs';
@@ -8,6 +8,9 @@ import { createModalController } from './modal-controller.mjs';
 
 const $ = id => document.getElementById(id);
 const store = createExamStore();
+// A result is shown only for the draft revision the user calculated; editing,
+// resetting or changing the row count bumps the revision and hides it again.
+const shown = new Map();
 const groups = {
   review: { title: 'اتصال المراجعة التراكميّ', keys: ['review-save', 'review-tathbeet'] },
   testing: { title: 'الاختبارات', keys: ['testing-monthly', 'testing-cumulative'] },
@@ -139,6 +142,9 @@ function renderExam() {
       input.setAttribute('aria-describedby', `${error.id} exam-error`);
       input.setAttribute('aria-errormessage', error.id);
       input.autocomplete = 'off';
+      // Marks are typed, never nudged: the wheel and arrow keys must not change them.
+      input.addEventListener('wheel', () => input.blur(), { passive: true });
+      input.addEventListener('keydown', event => { if (event.key === 'ArrowUp' || event.key === 'ArrowDown') event.preventDefault(); });
       input.addEventListener('input', () => {
         store.setValue(activeKey, rowIndex, field.id, input.validity.badInput ? 'invalid' : input.value);
         renderResult();
@@ -194,7 +200,7 @@ function renderValidation(draft) {
 
 function renderResult() {
   const draft = store.get(activeKey);
-  const { result } = draft;
+  const result = shown.get(activeKey) === draft.revision ? draft.result : null;
   const container = $('result-content');
   const config = EXAM_CONFIGS[activeKey];
   renderValidation(draft);
@@ -205,7 +211,6 @@ function renderResult() {
   document.querySelector('.draft-actions').hidden = !result && !draft.hasDraftData;
   $('failure-alert').hidden = !result || result.passed;
   if (!result) {
-    celebrated.delete(activeKey);
     // Keep the button and its listener alive, but never expose a stale copy.
     $('result-controls-parking').append(copyButton);
     if (container.firstChild) container.replaceChildren();
@@ -262,23 +267,35 @@ function renderResult() {
     $('failure-alert').querySelector('.failure-description').textContent = `النتيجة أقل من درجة النجاح (${review ? 95 : 90}). راجع الأخطاء قبل اعتماد النتيجة.`;
   }
   document.querySelectorAll('.row-result').forEach((node, i) => { node.textContent = result.rowDeductions[i] ? `−${result.rowDeductions[i].toFixed(1)}` : '0'; });
-  celebrate(activeKey, result);
 }
 
-// Original celebration, now driven by live scoring: it fires once when an exam's
-// score reaches its threshold (not on every keystroke), re-arms when the score
-// drops below it or the marks are cleared, and is skipped for reduced motion.
-const celebrated = new Set();
+// Original behaviour: every press of the calculate button celebrates when the
+// score reaches the exam's threshold. Skipped for reduced motion.
 function celebrate(key, result) {
   const group = EXAM_CONFIGS[key].group;
-  if (result.score < ORIGINAL_CELEBRATION_THRESHOLDS[group]) { celebrated.delete(key); return; }
-  if (celebrated.has(key)) return;
-  celebrated.add(key);
+  if (result.score < ORIGINAL_CELEBRATION_THRESHOLDS[group]) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   showConfetti();
   // The original pulsed the score for every group except review.
-  if (group !== 'review') $('total-result').style.animation = 'resultPulse 0.6s ease-in-out';
+  if (group !== 'review') {
+    const score = $('total-result');
+    score.style.animation = 'none';
+    void score.offsetWidth; // restart the pulse on repeated presses
+    score.style.animation = 'resultPulse 0.6s ease-in-out';
+  }
 }
+
+$('calculate-marks').addEventListener('click', () => {
+  const key = activeKey;
+  try { store.calculate(key, { force: true }); }
+  catch (error) { if (!(error instanceof ExamValidationError)) throw error; /* shown inline */ }
+  const draft = store.get(key);
+  if (draft.result) shown.set(key, draft.revision); else shown.delete(key);
+  renderResult();
+  if (!draft.result) { $('marks-body').querySelector('[aria-invalid="true"]')?.focus(); return; }
+  celebrate(key, draft.result);
+  $('result-content').scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+});
 
 // Original celebration thresholds (review 95, testing 99, consolidation 99, quiz 90).
 const ORIGINAL_CELEBRATION_THRESHOLDS = Object.freeze({ review: 95, testing: 99, consolidation: 99, quiz: 90 });

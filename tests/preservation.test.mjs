@@ -198,7 +198,7 @@ test('real Chromium baseline comparisons at 320/390/768/1024/1440 and threshold-
       if (captures) for (const [label, tab] of [['original', oldPage], ['restored', page]]) await tab.screenshot({ path: join(captures, `${width}-${label}-instructions.png`), fullPage: true });
     });
   }
-  await t.test('original confetti and pulse fire once when an exam reaches its original threshold, not on typing, switching or copying', async () => {
+  await t.test('original confetti and pulse fire on every calculate press at or above the original threshold, never on typing, switching or copying', async () => {
     await page.setViewport({ width: 1440, height: 1000 });
     await page.goto(appURL);
     await page.waitForFunction(() => !document.querySelector('#surah-input').disabled, { timeout: 45000 });
@@ -217,22 +217,27 @@ test('real Chromium baseline comparisons at 320/390/768/1024/1440 and threshold-
       const setScore = async score => page.$eval('#marks-body .word-openings', (input, score) => { input.value = 100 - score; input.dispatchEvent(new Event('input', { bubbles: true })); }, score);
       const schedules = () => page.evaluate(() => window.__confettiSchedules);
       const before = await schedules();
+      const calculate = () => page.$eval('#calculate-marks', button => button.click());
       await setScore(threshold - 1);
-      assert.equal(await schedules(), before, `${key} below threshold`);
+      assert.equal(await schedules(), before, `${key}: typing alone never celebrates`);
+      assert.equal(await page.$('#total-result'), null, `${key}: no result before pressing calculate`);
+      await calculate();
+      assert.equal(await schedules(), before, `${key}: below threshold does not celebrate`);
       await setScore(threshold);
-      assert.equal(await schedules(), before + 100, `${key} celebrates once on reaching its original threshold`);
+      assert.equal(await schedules(), before, `${key}: reaching the threshold by typing does not celebrate`);
+      assert.equal(await page.$('#total-result'), null, `${key}: editing hides the previous result`);
+      await calculate();
+      assert.equal(await schedules(), before + 100, `${key}: pressing calculate at the original threshold celebrates`);
       const pulse = await page.$eval('#total-result', node => node.style.animation);
       assert.equal(pulse.startsWith('resultPulse'), group !== 'review', `${key} pulse matches the original`);
-      await setScore(100);
+      await calculate();
+      assert.equal(await schedules(), before + 200, `${key}: every press celebrates again`);
       await page.$eval('#copy-result', button => button.click());
       await page.waitForFunction(() => typeof window.__preservationCopied === 'string');
       await page.evaluate(() => { window.__preservationCopied = undefined; });
       await page.$eval(`[data-section="${group === 'review' ? 'testing' : 'review'}"]`, button => button.click());
       await page.$eval(`[data-section="${group}"]`, button => button.click());
-      assert.equal(await schedules(), before + 100, `${key}: typing above, copying and switching do not repeat it`);
-      await setScore(threshold - 1);
-      await setScore(threshold);
-      assert.equal(await schedules(), before + 200, `${key} re-arms after dropping below the threshold`);
+      assert.equal(await schedules(), before + 200, `${key}: copying and switching do not celebrate`);
     }
   });
   assert.deepEqual(errors, []);
