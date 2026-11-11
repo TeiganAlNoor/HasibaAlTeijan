@@ -1,0 +1,116 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-09T18:21:39.568Z",
+        "reason": "Agent: table-scroll is an edge-to-edge semantic table frame; its th/td provide 12px text insets, verified in Chromium at mobile and desktop widths and protected by browser regression tests. Wrapper padding would duplicate the cell padding."
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-09T19:16:48.999Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.023Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.045Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "nested-cards",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.067Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.088Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "instructions.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.110Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "instructions.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.132Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "instructions.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.154Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "bounce-easing",
+        "value": "bounce",
+        "files": [
+          "instructions.html"
+        ],
+        "createdAt": "2026-11-09T19:16:49.176Z",
+        "reason": "User confirmed: restore the exact original visual identity and animation system from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9; tests/preservation.test.mjs compares these styles in Chromium. This exception does not claim WCAG compliance."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "TeiganCss.css"
+        ],
+        "createdAt": "2026-11-09T19:41:27.978Z",
+        "reason": "User confirmed: preserve the original visual identity from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9. The .quiz-note 4px golden accent border at line 1791 is present verbatim in that baseline; the stylesheet differs only by its final newline. Preserve the original quiz explanation styling, not a new redesign."
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "TeiganCss.css"
+        ],
+        "createdAt": "2026-11-09T19:41:28.069Z",
+        "reason": "User confirmed: preserve the original decorations and animations from a7f1ad63f56393d3effbddec16ef3ac7a5f31de9. The gradient is scoped to .quran-page-placeholder .placeholder-icon, the original decorative book icon with gentlePulse, not new heading or Quran verse typography. The baseline stylesheet and original motion are protected by tests/preservation.test.mjs."
+      }
+    ]
+  }
+}

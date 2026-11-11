@@ -5,14 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ملتقى تيجان النور - جامعة بيرزيت</title>
-  <link rel="stylesheet" href="TeiganCss.css">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-  <link rel="manifest" href="favicon_io/site.webmanifest">
-  <link rel="icon" type="image/png" sizes="192x192" href="favicon_io/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="favicon_io/android-chrome-512x512.png">
+  <link rel="stylesheet" href="css/TeiganCss.css">
+  <link rel="stylesheet" href="css/integration.css">
+  <link rel="preload" href="assets/fonts/NotoSansArabic-v2.012-e5ee313.ttf" as="font" type="font/ttf" crossorigin>
+  <meta name="theme-color" content="#027a79">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+  <link rel="manifest" href="assets/favicons/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicons/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicons/android-chrome-512x512.png">
   <!-- DIN Next LT Arabic Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +32,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#exam-heading">انتقل إلى العلامات</a>
   <!-- Hero Header Section -->
   <header class="header">
     <!-- Animated Background Elements -->
@@ -55,7 +59,7 @@
         <div class="logo-wrapper">
           <div class="logo-glow"></div>
           <div class="logo-ring"></div>
-          <img src="teigan.png" alt="تيجان" class="logo">
+          <img src="assets/images/teigan.png" alt="تيجان" class="logo">
         </div>
         <div class="brand-text">
           <h1 class="brand-name">ملتقى تيجان النور</h1>
@@ -67,21 +71,21 @@
   </header>
 
   <!-- Main Navigation Tabs -->
-  <nav class="main-navigation">
+  <nav class="main-navigation main-nav" aria-label="أقسام الامتحانات">
     <div class="nav-container">
-      <button class="nav-tab active" onclick="switchSection('review')" data-section="review">
+      <button type="button" class="nav-tab active" data-section="review">
         <span class="nav-icon">📖</span>
         <span class="nav-text">اتصال المراجعة التراكميّ</span>
       </button>
-      <button class="nav-tab" onclick="switchSection('testing')" data-section="testing">
+      <button type="button" class="nav-tab" data-section="testing">
         <span class="nav-icon">📝</span>
         <span class="nav-text">الاختبارات</span>
       </button>
-      <button class="nav-tab" onclick="switchSection('consolidation')" data-section="consolidation">
+      <button type="button" class="nav-tab" data-section="consolidation">
         <span class="nav-icon">📚</span>
         <span class="nav-text"> دورة التثبيت</span>
       </button>
-      <button class="nav-tab" onclick="switchSection('quiz')" data-section="quiz">
+      <button type="button" class="nav-tab" data-section="quiz">
         <span class="nav-icon">🎯</span>
         <span class="nav-text">المسابقات</span>
       </button>
@@ -89,61 +93,94 @@
   </nav>
 
   <!-- Instructions Button -->
-  <button class="instructions-btn" onclick="openInstructions()">
+  <button id="instructions-button" type="button" class="instructions-btn">
     <span class="instructions-icon">ℹ️</span>
     <span>التعليمات</span>
-  </button>
+  <span class="sr-only"> (تفتح في تبويب جديد للحفاظ على العلامات)</span></button>
 
   <!-- Main Content Area -->
   <main class="main-content">
     <!-- Review Section -->
     <section id="review-section" class="content-section active">
       <div class="section-header">
-        <h2 class="section-title">قسم اتصال المراجعة التراكميّ</h2>
+        <h2 id="exam-heading" tabindex="-1" class="section-title">قسم اتصال المراجعة التراكميّ</h2>
         <p class="section-subtitle">درجة النجاح: 95%</p>
       </div>
       <div class="sub-navigation">
-        <button class="sub-nav-btn active" onclick="showReviewSubType('save')">قسم الحفظ والمراجعة</button>
-        <button class="sub-nav-btn" onclick="showReviewSubType('tathbeet')">قسم التثبيت</button>
+        <button type="button" class="sub-nav-btn active" data-exam="review-save">قسم الحفظ والمراجعة</button>
+        <button type="button" class="sub-nav-btn" data-exam="review-tathbeet">قسم التثبيت</button>
       </div>
-      <!-- Quran Page Display Component -->
-      <div class="quran-page-container" id="review-quran-container">
-        <div class="quran-controls">
-          <div class="quran-controls-row">
-            <div class="control-group">
-              <label>السورة:</label>
-              <select id="review-surah-select" onchange="onSurahChange('review')">
-                <option value="">اختر السورة...</option>
-              </select>
-            </div>
-            <div class="control-group">
-              <label>من آية:</label>
-              <input type="number" id="review-ayah-start" min="1" value="1">
-            </div>
-            <div class="control-group">
-              <label>إلى آية:</label>
-              <input type="number" id="review-ayah-end" min="1" value="5">
-            </div>
-            <button class="quran-load-btn" onclick="loadVerses('review')">📖 عرض</button>
+      <span id="review-mushaf-anchor" hidden></span>
+    <div id="shared-mushaf" class="quran-page-container mushaf-panel" role="region" aria-labelledby="mushaf-heading">
+      <h3 id="mushaf-heading" class="sr-only">المصحف المشترك — موضع واحد محفوظ بين جميع الامتحانات</h3>
+      <div class="quran-controls">
+      <form id="range-form" novalidate>
+        <div class="quran-controls-row">
+          <div class="control-group surah-combobox" id="start-surah-combobox">
+            <label for="surah-input">السورة:</label>
+            <input id="surah-input" class="combobox-input" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="surah-options" autocomplete="off" placeholder="تحميل السور…" disabled>
+            <ul id="surah-options" class="surah-options" role="listbox" aria-label="السور" hidden></ul>
+            <span class="sr-only" id="surah-status" role="status"></span>
           </div>
-          <div class="quran-search-row">
-            <div class="quran-search-box">
-              <input type="text" id="review-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
-                oninput="searchVerseInSection('review')">
-              <div class="verse-search-results hidden" id="review-search-results"></div>
-            </div>
-          </div>
+          <div class="control-group"><label for="start-ayah">من آية:</label><input id="start-ayah" type="number" min="1" step="1" inputmode="numeric" value="1" required></div>
+          <div class="control-group" id="single-end-field"><label for="end-ayah">إلى آية:</label><input id="end-ayah" type="number" min="1" step="1" inputmode="numeric" value="5" required></div>
+          <button class="quran-load-btn" id="load-verses" type="submit" disabled>📖 عرض</button>
         </div>
-        <div class="quran-page" id="review-quran-page">
-          <div class="quran-page-placeholder">
-            <span class="placeholder-icon">📖</span>
-            <span>اختر السورة والآيات لعرضها</span>
+        <label class="checkbox-label"><span class="cross-check-control"><input id="cross-surah" type="checkbox"><svg class="cross-check-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><rect x="1" y="1" width="16" height="16" rx="3"/><path class="cross-check-stroke" pathLength="100" d="m4 9 3.3 3.3L14 5.5"/></svg></span><span>الموضع يمتد إلى سورة أخرى</span></label>
+        <div class="cross-range-fields quran-controls-row" id="cross-range-fields" hidden>
+          <div class="control-group surah-combobox" id="end-surah-combobox">
+            <label for="end-surah-input">سورة النهاية</label>
+            <input id="end-surah-input" class="combobox-input" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="end-surah-options" autocomplete="off" placeholder="اختر سورة النهاية" disabled>
+            <ul id="end-surah-options" class="surah-options" role="listbox" aria-label="سور النهاية" hidden></ul>
+            <span class="sr-only" id="end-surah-status" role="status"></span>
           </div>
+          <div class="control-group"><label for="cross-end-ayah">آية النهاية</label><input id="cross-end-ayah" type="number" min="1" step="1" inputmode="numeric" value="1"></div>
         </div>
+        <p id="range-error" class="error-message" role="alert"></p>
+      </form>
+      <div class="quran-search-row"><div class="quran-search-box quran-search-field" id="quran-search-container">
+        <label class="sr-only" for="verse-search">ابحث عن كلمة أو عبارة في المصحف كاملاً</label>
+        <input id="verse-search" type="search" autocomplete="off" placeholder="🔍 ابحث عن كلمة أو آية..." aria-controls="verse-search-results" aria-expanded="false">
+        <p id="search-status" class="sr-only" role="status" aria-live="polite">جارٍ تجهيز البحث المحلي…</p>
+        <div id="verse-search-results" class="verse-search-results" aria-label="نتائج البحث" hidden></div>
       </div>
-      <div id="review-content" class="calculator-area">
-        <!-- Dynamic content will be loaded here -->
+      </div></div>
+      <div id="reader-location" class="reader-location" hidden><p id="selected-range-summary"></p><button id="return-selected" type="button" class="secondary" hidden>العودة إلى الموضع المختار</button></div>
+      <p id="reader-progress" class="reader-progress" role="status" hidden></p>
+      <div id="quran-page" class="quran-page" aria-label="صفحة المصحف" aria-busy="false"><div class="quran-page-placeholder"><span class="placeholder-icon" aria-hidden="true">📖</span><span>اختر السورة والآيات لعرضها</span></div></div>
+      <div id="mushaf-pagination" class="quran-navigation mushaf-pagination" hidden>
+        <button type="button" id="previous-page" class="quran-nav-btn"><span class="nav-arrow" aria-hidden="true">→</span> الصفحة السابقة</button>
+        <span id="page-status" role="status" aria-live="polite"></span>
+        <button type="button" id="next-page" class="quran-nav-btn">الصفحة التالية <span class="nav-arrow" aria-hidden="true">←</span></button>
       </div>
+      <button type="button" id="retry-quran" class="secondary" hidden>إعادة تحميل المصحف</button>
+    </div>
+      <span id="review-calculator-anchor" hidden></span>
+    <div id="shared-calculator" class="calculator-area exam-panel" aria-labelledby="calculator-title">
+      <h3 id="calculator-title" class="calculator-title"></h3><p id="exam-note" class="sr-only"></p>
+      <div class="entry-selector" id="row-count-field" hidden><label for="entry-count">عدد المواضع</label><select id="entry-count"></select></div>
+      <p id="table-hint" class="table-hint sr-only">أدخل أعداد الأخطاء الصحيحة؛ الخانة الفارغة تساوي صفرًا. اسحب الجدول أفقيًا على الهاتف.</p>
+      <div class="table-container table-scroll" role="region" tabindex="0" aria-label="جدول إدخال الأخطاء" aria-describedby="table-hint">
+        <table class="calculator-table marks-table"><caption class="sr-only" id="marks-caption">علامات الامتحان الحالي</caption><thead id="marks-head"></thead><tbody id="marks-body"></tbody></table>
+      </div>
+      <div id="bonus-controls" hidden>
+        <h3 class="calculator-title bonus-title">الأسئلة الإضافية (بونص)</h3>
+        <div class="table-container"><table class="bonus-table">
+          <thead><tr><th scope="col">رقم السؤال</th><th scope="col">السؤال</th><th scope="col">الإجابة الصحيحة</th><th scope="col">النقاط الإضافية</th></tr></thead>
+          <tbody>
+            <tr><td>إضافي 1</td><td>سؤال إضافي رقم 1</td><td><label class="checkbox-container"><input id="bonus-q1" class="bonus-q1" type="checkbox" aria-label="إجابة السؤال الأول (+0.5)"><span class="checkmark"></span></label></td><td><span class="bonus-points" id="bonus-q1-points">0</span></td></tr>
+            <tr><td>إضافي 2</td><td>سؤال إضافي رقم 2</td><td><label class="checkbox-container"><input id="bonus-q2" class="bonus-q2" type="checkbox" aria-label="إجابة السؤال الثاني (+0.5)"><span class="checkmark"></span></label></td><td><span class="bonus-points" id="bonus-q2-points">0</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <p id="exam-error" class="error-message" role="alert"></p>
+      <div class="button-container"><button id="calculate-marks" type="button" class="main-calculate-btn">احسب النتائج</button></div>
+      <div class="draft-actions">
+        <button id="reset-marks" type="button" class="danger" hidden>مسح العلامات والبدء من جديد</button>
+        <button id="cancel-incomplete" type="button" class="secondary" hidden>إلغاء الإدخالات غير المكتملة</button>
+      </div>
+    </div>
+
     </section>
 
     <!-- Testing Section -->
@@ -153,47 +190,12 @@
         <p class="section-subtitle">اختر نوع الاختبار المطلوب</p>
       </div>
       <div class="sub-navigation">
-        <button class="sub-nav-btn active" onclick="showTestType('monthly')">الاختبار الشهري</button>
-        <button class="sub-nav-btn" onclick="showTestType('cumulative')">الاختبار التراكمي</button>
+        <button type="button" class="sub-nav-btn active" data-exam="testing-monthly">الاختبار الشهري</button>
+        <button type="button" class="sub-nav-btn" data-exam="testing-cumulative">الاختبار التراكمي</button>
       </div>
-      <!-- Quran Page Display Component -->
-      <div class="quran-page-container" id="testing-quran-container">
-        <div class="quran-controls">
-          <div class="quran-controls-row">
-            <div class="control-group">
-              <label>السورة:</label>
-              <select id="testing-surah-select" onchange="onSurahChange('testing')">
-                <option value="">اختر السورة...</option>
-              </select>
-            </div>
-            <div class="control-group">
-              <label>من آية:</label>
-              <input type="number" id="testing-ayah-start" min="1" value="1">
-            </div>
-            <div class="control-group">
-              <label>إلى آية:</label>
-              <input type="number" id="testing-ayah-end" min="1" value="5">
-            </div>
-            <button class="quran-load-btn" onclick="loadVerses('testing')">📖 عرض</button>
-          </div>
-          <div class="quran-search-row">
-            <div class="quran-search-box">
-              <input type="text" id="testing-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
-                oninput="searchVerseInSection('testing')">
-              <div class="verse-search-results hidden" id="testing-search-results"></div>
-            </div>
-          </div>
-        </div>
-        <div class="quran-page" id="testing-quran-page">
-          <div class="quran-page-placeholder">
-            <span class="placeholder-icon">📖</span>
-            <span>اختر السورة والآيات لعرضها</span>
-          </div>
-        </div>
-      </div>
-      <div id="testing-content" class="calculator-area">
-        <!-- Dynamic content will be loaded here -->
-      </div>
+      <span id="testing-mushaf-anchor" hidden></span>
+      <span id="testing-calculator-anchor" hidden></span>
+
     </section>
 
     <!-- Consolidation Section -->
@@ -202,44 +204,9 @@
         <h2 class="section-title">قسم التثبيت</h2>
         <p class="section-subtitle">جدول التثبيت والمتابعة</p>
       </div>
-      <!-- Quran Page Display Component -->
-      <div class="quran-page-container" id="consolidation-quran-container">
-        <div class="quran-controls">
-          <div class="quran-controls-row">
-            <div class="control-group">
-              <label>السورة:</label>
-              <select id="consolidation-surah-select" onchange="onSurahChange('consolidation')">
-                <option value="">اختر السورة...</option>
-              </select>
-            </div>
-            <div class="control-group">
-              <label>من آية:</label>
-              <input type="number" id="consolidation-ayah-start" min="1" value="1">
-            </div>
-            <div class="control-group">
-              <label>إلى آية:</label>
-              <input type="number" id="consolidation-ayah-end" min="1" value="5">
-            </div>
-            <button class="quran-load-btn" onclick="loadVerses('consolidation')">📖 عرض</button>
-          </div>
-          <div class="quran-search-row">
-            <div class="quran-search-box">
-              <input type="text" id="consolidation-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
-                oninput="searchVerseInSection('consolidation')">
-              <div class="verse-search-results hidden" id="consolidation-search-results"></div>
-            </div>
-          </div>
-        </div>
-        <div class="quran-page" id="consolidation-quran-page">
-          <div class="quran-page-placeholder">
-            <span class="placeholder-icon">📖</span>
-            <span>اختر السورة والآيات لعرضها</span>
-          </div>
-        </div>
-      </div>
-      <div id="consolidation-content" class="calculator-area">
-        <!-- Dynamic content will be loaded here -->
-      </div>
+      <span id="consolidation-mushaf-anchor" hidden></span>
+      <span id="consolidation-calculator-anchor" hidden></span>
+
     </section>
 
     <!-- Quiz Section -->
@@ -249,54 +216,24 @@
         <p class="section-subtitle">حاسبة المسابقات التنافسية</p>
       </div>
       <div class="sub-navigation">
-        <button class="sub-nav-btn active" onclick="showQuizType('positions')">المواضع</button>
-        <button class="sub-nav-btn" onclick="showQuizType('narration')">السرد</button>
+        <button type="button" class="sub-nav-btn active" data-exam="quiz-positions">المواضع</button>
+        <button type="button" class="sub-nav-btn" data-exam="quiz-narration">السرد</button>
       </div>
-      <!-- Quran Page Display Component -->
-      <div class="quran-page-container" id="quiz-quran-container">
-        <div class="quran-controls">
-          <div class="quran-controls-row">
-            <div class="control-group">
-              <label>السورة:</label>
-              <select id="quiz-surah-select" onchange="onSurahChange('quiz')">
-                <option value="">اختر السورة...</option>
-              </select>
-            </div>
-            <div class="control-group">
-              <label>من آية:</label>
-              <input type="number" id="quiz-ayah-start" min="1" value="1">
-            </div>
-            <div class="control-group">
-              <label>إلى آية:</label>
-              <input type="number" id="quiz-ayah-end" min="1" value="5">
-            </div>
-            <button class="quran-load-btn" onclick="loadVerses('quiz')">📖 عرض</button>
-          </div>
-          <div class="quran-search-row">
-            <div class="quran-search-box">
-              <input type="text" id="quiz-verse-search" placeholder="🔍 ابحث عن كلمة أو آية..."
-                oninput="searchVerseInSection('quiz')">
-              <div class="verse-search-results hidden" id="quiz-search-results"></div>
-            </div>
-          </div>
-        </div>
-        <div class="quran-page" id="quiz-quran-page">
-          <div class="quran-page-placeholder">
-            <span class="placeholder-icon">📖</span>
-            <span>اختر السورة والآيات لعرضها</span>
-          </div>
-        </div>
-      </div>
-      <div id="quiz-content" class="calculator-area">
-        <!-- Dynamic content will be loaded here -->
-      </div>
+      <span id="quiz-mushaf-anchor" hidden></span>
+      <span id="quiz-calculator-anchor" hidden></span>
+
     </section>
   </main>
 
   <!-- Results Display Area -->
-  <div id="result-content" class="result-container">
-    <!-- Results will be displayed here -->
-  </div>
+  <section class="result-container result-panel" aria-label="نتيجة الامتحان" aria-live="polite" aria-atomic="true">
+    <div id="failure-alert" class="failure-alert" role="status" hidden>
+      <span class="failure-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.2 18a2 2 0 0 0 1.7 3h16.2a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4m0 4h.01"/></svg></span>
+      <div><h3 class="failure-heading"></h3><p class="failure-description"></p></div>
+    </div>
+    <div id="result-content"></div>
+    <div id="result-controls-parking" hidden><button id="copy-result" type="button" class="secondary" disabled hidden>نسخ النتيجة</button></div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
@@ -306,7 +243,20 @@
     </div>
   </footer>
 
-  <script src="Teigan.js"></script>
+  <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">تأكيد مسح العلامات</h2>
+    <p id="reset-description"></p>
+    <div class="dialog-actions"><button type="button" id="cancel-reset" class="secondary" autofocus>إلغاء</button><button type="button" id="confirm-reset" class="danger">نعم، امسح</button></div>
+  </dialog>
+  <dialog id="copy-dialog" aria-labelledby="copy-title" aria-describedby="copy-description">
+    <h2 id="copy-title">نسخ النتيجة يدويًا</h2><p id="copy-description">تعذّر النسخ التلقائي. النص الصحيح محدّد أدناه؛ استخدم نسخ من جهازك.</p>
+    <label for="manual-copy">النتيجة فقط</label><input id="manual-copy" readonly>
+    <div class="dialog-actions"><button type="button" id="close-copy" class="secondary">إغلاق</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>تحتاج الحاسبة إلى تفعيل JavaScript لحساب العلامات وعرض المصحف.</noscript>
+
+  <script type="module" src="js/Teigan.js"></script>
 </body>
 
 </html>
